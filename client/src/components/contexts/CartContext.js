@@ -45,37 +45,18 @@ const reducer = (state, action) => {
         
         // The user would like to add an item to the cart
         case 'add-item':{
-            console.log('in add item');
             const item = action.data;
-            // let newItems = {...state.currentItems};
             let newItems = clone(state.currentItems);
-            console.log(newItems);
-            console.log()
             if(newItems.hasOwnProperty(item.id)){
                 // We already have this item in the cart, so just need to update the count
-                console.log('had item');
-                console.log(newItems[item.id].numInCart);
-                console.log(item.count);
                 newItems[item.id].numInCart += item.count;
-                console.log(newItems);
             }
 
             else{
                 // We do not already have this item in the cart, so we need to add a new key
                 // entirely
                 // debugger;
-                console.log('newItems1');
-                console.log(newItems);
-                console.log('didnt have item');
-                console.log(item);
-                console.log(item.count);
-                // console.log('newItems2');
-                // console.log(newItems);
-                // console.log(item);
-                // console.log(item.count);
                 newItems[item.id] = {numInCart: item.count, price: item.price};
-                console.log('newItems3');
-                console.log(newItems);
             }
 
             return {
@@ -89,32 +70,20 @@ const reducer = (state, action) => {
             // debugger;
             const item = action.data;
             let newItems = clone(state.currentItems);
-            console.log('in remove-item');
-            console.log(newItems);
             // We have more than one instance in the card, so we just need to remove one
-            console.log(newItems[item.id]);
-            console.log(newItems.hasOwnProperty(item.id))
             if(newItems.hasOwnProperty(item.id) && newItems[item.id].numInCart > 1){
-                console.log('in case 1');
                 newItems[item.id].numInCart --;
             }
 
             // We do not allow the cart to have 0 of an item in it, so in this case
             // we if we remove the item from the cart we remove reference to it altogether
             else if(newItems.hasOwnProperty(item.id) && newItems[item.id].numInCart === 1){
-                console.log('in case 2');
                 delete newItems[item.id];
             }
 
             // An else here would cover the case that the item is already not in the cart. 
             // In this case there is nothing to remove, so do nothing IE no need for a separate case
-            // else{
-            //     console.log('in case 3');
-            //     return {
-            //         ...state,
-            //         currentItems: newItems,
-            //     }
-            // }
+
             return {
                 ...state,
                 currentItems: newItems,
@@ -124,12 +93,8 @@ const reducer = (state, action) => {
         case 'delete-item':{
             const item = action.data;
             let newItems = clone(state.currentItems);
-            if(newItems.hasOwnProperty(item.id)){
-                console.log('item in cart');
-                console.log(newItems);
-                delete newItems[item.id];
-            } 
-            console.log(newItems);
+            if(newItems.hasOwnProperty(item.id)) delete newItems[item.id];
+        
             return {
                 ...state,
                 currentItems: newItems,
