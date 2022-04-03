@@ -104,7 +104,10 @@ const getProductsByCategories = async (req, res) => {
     const items = await db.collection("items").find({ category }).toArray();
     res.status(200).json({ status: 200, data: items });
   } catch (err) {
-    res.status(500).json({ status: 500, message: "" });
+    res.status(500).json({
+      status: 500,
+      message: "The server couldn't get the information!",
+    });
   }
   client.close();
 };
