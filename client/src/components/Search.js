@@ -1,4 +1,4 @@
-// search bar : stretch goal
+// stretch goal
 
 import React from "react";
 import styled from "styled-components";
