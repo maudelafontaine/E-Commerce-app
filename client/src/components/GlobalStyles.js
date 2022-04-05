@@ -34,8 +34,10 @@ export default createGlobalStyle`
       padding: 0;
       border: 0;
       box-sizing: border-box;
-      font-size: 100%;
+      /* font-size: 100%; */
       vertical-align: baseline;
+      list-style-type: none;
+      font-size: 20px ;
   }
   /* HTML5 display-role reset for older browsers */
   article, aside, details, figcaption, figure,
@@ -45,9 +47,7 @@ export default createGlobalStyle`
   body {
       line-height: 1;
   }
-  ol, ul {
-      list-style: none;
-  }
+
   blockquote, q {
       quotes: none;
   }
@@ -64,7 +64,7 @@ label,
 button {
   color: #fff;
   font-family: var(--font-heading);
-  font-size: 24px;
+  font-size: 20px;
   text-align: center;
 }
 p,
@@ -73,7 +73,10 @@ li,
 blockquote,
 input {
   font-family: var(--font-body);
+  font-size: 18px ;
+  margin: 4px;
 }
+
 
   input {
     font-size: 24px;
@@ -82,4 +85,6 @@ input {
     border-radius: 2px;
     padding: 0 12px;
   }
+
+
 `;

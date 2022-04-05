@@ -1,4 +1,4 @@
-import React from 'react';
+import React from "react";
 /*
     clone is needed becase spread operator is only doing a shallow clone, and our state consists of a nested object
     in strict mode, react calls all reducer functions twice(!) to check for unintended side effects. Since the copy
@@ -7,9 +7,8 @@ import React from 'react';
     https://stackoverflow.com/questions/54892403/usereducer-action-dispatched-twice
     https://redux.js.org/tutorials/fundamentals/part-3-state-actions-reducers#writing-reducers
 */
-import clone from 'just-clone';
+import clone from "just-clone";
 export const CartContext = React.createContext();
-
 
 /*
     Items in the cart will be stored in an object where the item id will be mapped to a count of items
@@ -32,135 +31,132 @@ export const CartContext = React.createContext();
   of the items in the cart
 */
 const initialState = {
-    currentItems: {},
-    status: 'idle'
-}
-
-
-const reducer = (state, action) => {
-    
-    // action is of the form {type, data}
-    // data is of the form {id, count, price}
-    switch (action.type){
-        
-        // The user would like to add an item to the cart
-        case 'add-item':{
-            const item = action.data;
-            let newItems = clone(state.currentItems);
-            if(newItems.hasOwnProperty(item.id)){
-                // We already have this item in the cart, so just need to update the count
-                newItems[item.id].numInCart += item.count;
-            }
-
-            else{
-                // We do not already have this item in the cart, so we need to add a new key
-                // entirely
-                // debugger;
-                newItems[item.id] = {numInCart: item.count, price: item.price};
-            }
-
-            return {
-                ...state,
-                currentItems: newItems,
-            };
-        }
-        
-        // The user would like to remove a single instance of an item from the cart
-        case 'remove-item':{
-            // debugger;
-            const item = action.data;
-            let newItems = clone(state.currentItems);
-            // We have more than one instance in the card, so we just need to remove one
-            if(newItems.hasOwnProperty(item.id) && newItems[item.id].numInCart > 1){
-                newItems[item.id].numInCart --;
-            }
-
-            // We do not allow the cart to have 0 of an item in it, so in this case
-            // we if we remove the item from the cart we remove reference to it altogether
-            else if(newItems.hasOwnProperty(item.id) && newItems[item.id].numInCart === 1){
-                delete newItems[item.id];
-            }
-
-            // An else here would cover the case that the item is already not in the cart. 
-            // In this case there is nothing to remove, so do nothing IE no need for a separate case
-
-            return {
-                ...state,
-                currentItems: newItems,
-            }
-        }
-        // The user would like to remove all instances of an item from the cart
-        case 'delete-item':{
-            const item = action.data;
-            let newItems = clone(state.currentItems);
-            if(newItems.hasOwnProperty(item.id)) delete newItems[item.id];
-        
-            return {
-                ...state,
-                currentItems: newItems,
-            }
-        }
-        
-        // TODO: Implement this case once services are ready
-        // case 'confirm-purchase':
-        //     return {
-
-        //     }
-        
-        default:
-            throw new Error(`Action type ${action.type} is not recognized!`)
-    }
+  currentItems: {},
+  status: "idle",
 };
 
-export const CartProvider = ({ children }) => {
-    const [state, dispatch] = React.useReducer(reducer, initialState);
-    // functions which take action on the contents of the cart
-    const addItem = (data) => {
-        dispatch({
-            type:'add-item',
-            data,
-        });
-    };
-    
-    const removeItem = (data) => {
-        dispatch({
-            type:'remove-item',
-            data,
-        });
-    };
+const reducer = (state, action) => {
+  // action is of the form {type, data}
+  // data is of the form {id, count, price}
+  switch (action.type) {
+    // The user would like to add an item to the cart
+    case "add-item": {
+      const item = action.data;
+      let newItems = clone(state.currentItems);
+      if (newItems.hasOwnProperty(item.id)) {
+        // We already have this item in the cart, so just need to update the count
+        newItems[item.id].numInCart += item.count;
+      } else {
+        // We do not already have this item in the cart, so we need to add a new key
+        // entirely
+        // debugger;
+        newItems[item.id] = { numInCart: item.count, price: item.price };
+      }
 
-    const deleteItem = (data) => {
-        dispatch({
-            type:'delete-item',
-            data,
-        });
-    };
+      return {
+        ...state,
+        currentItems: newItems,
+      };
+    }
 
-    // 
+    // The user would like to remove a single instance of an item from the cart
+    case "remove-item": {
+      // debugger;
+      const item = action.data;
+      let newItems = clone(state.currentItems);
+      // We have more than one instance in the card, so we just need to remove one
+      if (newItems.hasOwnProperty(item.id) && newItems[item.id].numInCart > 1) {
+        newItems[item.id].numInCart--;
+      }
 
+      // We do not allow the cart to have 0 of an item in it, so in this case
+      // we if we remove the item from the cart we remove reference to it altogether
+      else if (
+        newItems.hasOwnProperty(item.id) &&
+        newItems[item.id].numInCart === 1
+      ) {
+        delete newItems[item.id];
+      }
 
-    // TODO: implement this once the services are ready
-    // const purchaseItemsInCart = () => {
-    //     dispatch({
-    //         type:'confirm-purchase',
-    //     });
-    // }
+      // An else here would cover the case that the item is already not in the cart.
+      // In this case there is nothing to remove, so do nothing IE no need for a separate case
 
-    return(
-        <CartContext.Provider
-            value={{
-                ...state,
-                actions:{
-                    addItem,
-                    removeItem,
-                    deleteItem,
-                    // purchaseItemsInCart
-                }
-            }}
-        >
-            { children }
-        </CartContext.Provider>
-    )
-}
+      return {
+        ...state,
+        currentItems: newItems,
+      };
+    }
+    // The user would like to remove all instances of an item from the cart
+    case "delete-item": {
+      const item = action.data;
+      let newItems = clone(state.currentItems);
+      if (newItems.hasOwnProperty(item.id)) delete newItems[item.id];
 
-export default CartContext;
+      return {
+        ...state,
+        currentItems: newItems,
+      };
+    }
+
+    // TODO: Implement this case once services are ready
+    // case 'confirm-purchase':
+    //     return {
+
+    //     }
+
+    default:
+      throw new Error(`Action type ${action.type} is not recognized!`);
+  }
+};
+
+// export const CartProvider = ({ children }) => {
+//     const [state, dispatch] = React.useReducer(reducer, initialState);
+//     // functions which take action on the contents of the cart
+//     const addItem = (data) => {
+//         dispatch({
+//             type:'add-item',
+//             data,
+//         });
+//     };
+
+//     const removeItem = (data) => {
+//         dispatch({
+//             type:'remove-item',
+//             data,
+//         });
+//     };
+
+//     const deleteItem = (data) => {
+//         dispatch({
+//             type:'delete-item',
+//             data,
+//         });
+//     };
+
+//
+
+// TODO: implement this once the services are ready
+// const purchaseItemsInCart = () => {
+//     dispatch({
+//         type:'confirm-purchase',
+//     });
+// }
+
+//     return(
+//         <CartContext.Provider
+//             value={{
+//                 ...state,
+//                 actions:{
+//                     addItem,
+//                     removeItem,
+//                     deleteItem,
+//                     // purchaseItemsInCart
+//                 }
+//             }}
+//         >
+//             { children }
+//         </CartContext.Provider>
+//     )
+// }
+
+// export default CartContext;
