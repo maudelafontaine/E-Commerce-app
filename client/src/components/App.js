@@ -9,6 +9,7 @@ import Homepage from "./Homepage";
 import AboutUs from "./AboutUs";
 import Confirmation from "./Confirmation";
 import Login from "./Login";
+import TestCart from "./Cart/TestCart";
 
 // import Cart from "./Cart";
 
@@ -38,7 +39,7 @@ const App = () => {
             <Route path="/category/fitness" element={<Fitness />} />
             <Route path="/category/lifestyle" element={<Lifestyle />} />
             <Route path="/category/medical" element={<Medical />} />
-            {/* <Route path="/cart" element={<Cart />} /> */}
+            <Route path="/cart" element={<TestCart />} />
             <Route path="/category/pets" element={<Pets />} />
             <Route path="/category/gaming" element={<Gaming />} />
 

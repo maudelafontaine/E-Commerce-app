@@ -168,15 +168,17 @@ export const CartProvider = ({ children }) => {
 
     const getTotal = () => {
         // Returns the total cost of the items in the cart
-        return Object.keys(state.currentItems).reduce(
+        const total =  Object.keys(state.currentItems).reduce(
             (previousValue, currentValue) => {
                 // previousValue is the total cost so far
                 // currentValue is the key of the current item in the cart
-
-                const currentItem = state.currentItems[currentItem];
+                console.log(currentValue);
+                console.log(previousValue);
+                const currentItem = state.currentItems[currentValue];
                 return previousValue + currentItem.price;
             }, 0
         );
+        return total;
     };
 
     // 
