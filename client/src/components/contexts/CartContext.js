@@ -175,7 +175,9 @@ export const CartProvider = ({ children }) => {
                 console.log(currentValue);
                 console.log(previousValue);
                 const currentItem = state.currentItems[currentValue];
-                return previousValue + currentItem.price;
+                console.log('count ', currentItem.count);
+                console.log('price ', currentItem.price);
+                return previousValue + (currentItem.numInCart *  currentItem.price);
             }, 0
         );
         return total;

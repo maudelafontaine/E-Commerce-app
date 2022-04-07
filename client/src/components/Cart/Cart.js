@@ -1,7 +1,8 @@
-import React, {useContext, useEffect} from "react";
+import React, {useContext, useEffect, useState} from "react";
 import styled from 'styled-components';
 import CartContext from "../contexts/CartContext";
 import CartItem from "./CartItem";
+import clone from "just-clone";
 // TODO: remove once endpoint is setup
 const cartDetailsData = [
     {
@@ -27,6 +28,8 @@ const cartDetailsData = [
 ]
 
 export const Cart = () => {
+    
+    const [localTotal, setLocalTotal] = useState(null);
     const {
         currentItems,
         actions:{
@@ -38,8 +41,25 @@ export const Cart = () => {
         }
     } = useContext(CartContext);
 
+    useEffect(() => console.log(getTotal()), [currentItems]);
+
+    // const getTotal = () => {
+    //     // Returns the total cost of the items in the cart
+    //     const total =  Object.keys(currentItems).reduce(
+    //         (previousValue, currentValue) => {
+    //             // previousValue is the total cost so far
+    //             // currentValue is the key of the current item in the cart
+    //             console.log(currentValue);
+    //             console.log(previousValue);
+    //             const currentItem = currentItems[currentValue];
+    //             return previousValue + currentItem.price;
+    //         }, 0
+    //     );
+    //     return total;
+    // };
+
     // TODO: Make call to populate cart item details on component load
-    useEffect(() => {console.log('hello'); console.log(currentItems)}, [])
+    // useEffect(() => {console.log('hello'); console.log(currentItems)}, [])
     return(
         <CartWrapper>
             <CartSideCard>
