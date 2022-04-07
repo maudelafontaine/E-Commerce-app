@@ -3,7 +3,7 @@ import styled from "styled-components";
 
 import CartContext from "../contexts/CartContext";
 
-import { IoBagRemove} from 'react-icons/io5';
+import { IoClose} from 'react-icons/io5';
 
 import SquareImage from "../SquareImage";
 
@@ -16,6 +16,11 @@ export const CartItem = ({id, name, price, imageSrc, count}) => {
             deleteItem,
         }
     } = useContext(CartContext);
+ 
+    const handleChange = (evt) => {
+        // console.log(evt.target.value + ' ' + id);
+        setItemNumber({id, count: parseInt(evt.target.value)});
+    }
 
     return(
         <CartItemWrapper>
@@ -26,15 +31,18 @@ export const CartItem = ({id, name, price, imageSrc, count}) => {
                     <Price>{price}</Price>
                 </ProductDetails>
             </Item>
-            <NumberSelector
-                min={0}
-                max={20}
-                default={count}
-                type="number"
-            />
-            <RemoveFromCartButton>
-                <IoBagRemove/>
-            </RemoveFromCartButton>
+            <InputContainer>
+                <NumberSelector
+                    min={0}
+                    max={20}
+                    defaultValue={1}
+                    type="number"
+                    onChange = {handleChange}
+                />
+                <RemoveFromCartButton>
+                    <IoClose/>
+                </RemoveFromCartButton>
+            </InputContainer>
         </CartItemWrapper>
     )
 }
@@ -43,13 +51,13 @@ const CartItemWrapper = styled.div`
     display: flex;
     align-items: center;
     justify-content: space-between;
-    padding: 10px 5px;
+    padding: 20px 5px;
 `;
 
 const Item = styled.div`
     display: flex;
     align-items;
-
+    margin-right: 20px;
 `;
 
 const ProductDetails = styled.div`
@@ -68,12 +76,25 @@ const Price = styled.div`
     padding-top: 10px;
 `;
 
+const InputContainer = styled.div`
+    display: flex;
+`;
+
 const NumberSelector = styled.input`
-    width: 7%;
+    /* width: 10% */
+    width: 15%;
     margin-right: 5px;
+    outline: none;
+    border: none;
 `;
 
 const RemoveFromCartButton = styled.button`
+    color: black;
+    outline: none;
+    background-color: transparent
+    text-decoration: none;
+    border: none;
+
 `;
 
 export default CartItem;
