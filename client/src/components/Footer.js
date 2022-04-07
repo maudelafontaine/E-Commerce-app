@@ -1,3 +1,8 @@
+/* Footer component : has info relative to 
+- footer menu : fake links to pages and one link to About us page
+- social links : fake links to our social medias
+- newsletter sign up : form to register to our newsletter 
+*/
 import React from "react";
 import styled from "styled-components";
 import { NavLink } from "react-router-dom";
@@ -37,16 +42,18 @@ const Footer = () => {
         <li>Privacy policy</li>
       </Menu>
       <SocialMedia>
-        <h2 style={{ color: "#003399" }}>SOCIAL LINKS</h2>
+        <h2 style={{ color: "#003399", fontSize: "22px" }}>SOCIAL LINKS</h2>
         <Icons>
-          <AiFillInstagram size={30} />
-          <AiFillFacebook size={30} />
-          <AiFillTwitterCircle size={30} />
-          <FaPinterest size={30} />
+          <AiFillInstagram size={33} />
+          <AiFillFacebook size={33} />
+          <AiFillTwitterCircle size={33} />
+          <FaPinterest size={33} />
         </Icons>
       </SocialMedia>
       <Newsletter>
-        <h2 style={{ color: "#003399" }}>NEWSLETTER SIGN UP</h2>
+        <h2 style={{ color: "#003399", fontSize: "22px" }}>
+          NEWSLETTER SIGN UP
+        </h2>
         <Signup placeholder="Enter you email"></Signup>
         <Btn>Sign up</Btn>
       </Newsletter>
@@ -56,8 +63,10 @@ const Footer = () => {
 
 export default Footer;
 
+// Styles :
+
+// Footer container
 const Container = styled.div`
-  /* background-color: #0073e6; */
   background-color: #c0c0c0;
   display: flex;
   flex-direction: row;
@@ -65,6 +74,7 @@ const Container = styled.div`
   height: 250px;
 `;
 
+// Footer menu container
 const Menu = styled.div`
   margin-top: 15px;
   display: flex;
@@ -74,10 +84,11 @@ const Menu = styled.div`
   color: #ebf0fa;
 `;
 
+// About us page link
 const NavigationLink = styled(NavLink)`
   font-family: var(--font-body);
   font-size: 18px;
-  font-weight: bold;
+  /* font-weight: bold; */
   color: #ebf0fa;
   text-decoration: none;
   margin: 4px;
@@ -88,6 +99,7 @@ const NavigationLink = styled(NavLink)`
   }
 `;
 
+// Social media icons container
 const Icons = styled.div`
   display: flex;
   flex-direction: row;
@@ -96,6 +108,7 @@ const Icons = styled.div`
   justify-content: space-between;
 `;
 
+// List of social media icons
 const SocialMedia = styled.div`
   margin-top: 15px;
   margin-left: 20px;
@@ -103,6 +116,7 @@ const SocialMedia = styled.div`
   flex-direction: column;
 `;
 
+// Newsletter container
 const Newsletter = styled.div`
   margin-top: 15px;
   margin-right: 20px;
@@ -111,13 +125,15 @@ const Newsletter = styled.div`
   flex-direction: column;
 `;
 
+// Newsletter input
 const Signup = styled.input`
   margin-top: 5px;
   border-color: white;
   font-size: 18px;
 `;
 
+// Sign in for newsletter button
 const Btn = styled.button`
   background-color: black;
-  margin-left: 4px;
+  font-size: 20px;
 `;
