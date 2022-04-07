@@ -1,15 +1,15 @@
 import { useEffect, useState } from "react";
 import styled from "styled-components";
 
-const Medical = () => {
-  const medical = { category: "Medical" };
+const Industrial = () => {
+  const industrial = { category: "Industrial" };
   const [item, setItem] = useState([]);
   useEffect(() => {
     const fetchingData = async () => {
       const data = await fetch("/product/category", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(medical),
+        body: JSON.stringify(industrial),
       });
       const json = await data.json();
       setItem(json);
@@ -33,5 +33,4 @@ const Medical = () => {
 const H2 = styled.h2`
   color: black;
 `;
-
-export default Medical;
+export default Industrial;
