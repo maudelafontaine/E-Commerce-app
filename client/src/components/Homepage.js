@@ -1,3 +1,5 @@
+// Homepage component : landing page of our website
+
 import React from "react";
 import styled from "styled-components";
 
@@ -32,6 +34,11 @@ const Message = styled.h2`
   color: black;
   margin-top: 10px;
   margin-bottom: 8px;
+  background-color: white;
+  padding: 22px;
+  border-style: solid;
+  border-color: #003399;
+  border-width: 4px;
 `;
 
 const Btn = styled.button`
@@ -42,4 +49,7 @@ const Btn = styled.button`
   border-color: white;
   font-weight: bold;
   color: #003399;
+  /* color: white; */
+  background-color: #ccd9ff;
+  border: none;
 `;
