@@ -42,6 +42,7 @@ const Header = () => {
         <DropdownContent>
           <Link to="/category/entertainment">Entertainment</Link>
           <Link to="/category/fitness">Fitness</Link>
+          <Link to="/category/industrial">Industrial</Link>
           <Link to="/category/gaming">Gaming</Link>
           <Link to="/category/lifestyle">Lifestyle</Link>
           <Link to="/category/medical">Medical</Link>

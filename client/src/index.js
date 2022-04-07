@@ -1,21 +1,13 @@
 import React from "react";
 import ReactDOM from "react-dom";
 import App from "./components/App";
-// import { CartProvider } from "./components/contexts/CartContext";
-
-// const rootElement = document.getElementById("root");
-// ReactDOM.render(
-//   <CartProvider>
-//   <App />
-//   </CartProvider>,
-//   rootElement
-// );
+import { CartProvider } from "./components/contexts/CartContext";
 
 ReactDOM.render(
   <React.StrictMode>
-    {/* <CartProvider> */}
+    <CartProvider>
     <App />
-    {/* </CartProvider> */}
+    </CartProvider>
   </React.StrictMode>,
   document.getElementById("root")
 );
