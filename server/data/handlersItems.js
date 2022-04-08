@@ -1,6 +1,7 @@
 const { response } = require("express");
 const { MongoClient } = require("mongodb");
 require("dotenv").config();
+console.log(process.env);
 const { MONGO_URI } = process.env;
 const options = {
   useNewUrlParser: true,
@@ -49,6 +50,41 @@ const getProduct = async (req, res) => {
   }
   client.close();
 };
+
+//        .GET all items with ids in a list
+
+const getProductsInList = async (req, res) => {
+  const client = new MongoClient(MONGO_URI, options);
+  let { ids } = req.body;
+  ids = ids.map(id => parseInt(id));
+
+  try{
+    await client.connect();
+    const db = client.db("Commerce");
+    const items = await db.collection('items').find({"_id" : {"$in": ids}}).toArray();
+    // console.log(items);
+    res.status(200).json({
+      status: 200,
+      message: "Success",
+      ids,
+      data: items,
+    });
+  }
+
+  catch(err){
+    console.log(err);
+    res.status(500).json({
+      status: 500,
+      message: "The server couldn't get the information!",
+      data: { _id },
+    });
+  }
+
+  finally{
+    client.close();
+  }
+};
+
 //        .PATCH/ decrement the number of the items
 const updateProductCount = async (req, res) => {
   const client = new MongoClient(MONGO_URI, options);
@@ -96,6 +132,7 @@ const getCategoryById = async (req, res) => {
 };
 // .GET the items by the category
 const getProductsByCategories = async (req, res) => {
+  console.log(MONGO_URI);
   const client = new MongoClient(MONGO_URI, options);
   const { category } = req.body;
   try {
@@ -118,4 +155,5 @@ module.exports = {
   updateProductCount,
   getCategoryById,
   getProductsByCategories,
+  getProductsInList
 };

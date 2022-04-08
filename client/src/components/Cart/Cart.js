@@ -25,23 +25,50 @@ const cartDetailsData = [
         "numInStock": 3,
         "companyId": 16478
       }
-]
+];
 
 export const Cart = () => {
     
     const [localTotal, setLocalTotal] = useState(null);
+    const [cartDetails, setCartDetails] = useState([]);
+    const [cartDetailsStatus, setCartDetailsStatus] = useState('waiting');
+        
     const {
         currentItems,
-        actions:{
-            setItemNumber,
-            addItem,
-            removeItem,
-            deleteItem,
-            getTotal,
-        }
+            actions:{
+                setItemNumber,
+                addItem,
+                removeItem,
+                deleteItem,
+                getTotal,
+                getIds
+            }
     } = useContext(CartContext);
 
-    useEffect(() => console.log(getTotal()), [currentItems]);
+    useEffect(() => {
+        setCartDetailsStatus('waiting');
+        const payload = {ids: getIds()};
+        const fetchingData = async () => {
+            try{
+                const data = await fetch("/products/list", {
+                    method: "POST",
+                    headers: { "Content-Type": "application/json" },
+                    body: JSON.stringify(payload),
+                });
+                const json = await data.json();
+                console.log('json.data');
+                console.log(json);
+                setCartDetails(json.data);
+                setCartDetailsStatus('idle');
+            }
+            
+            catch(err){
+                setCartDetailsStatus('err');
+            }
+        };
+
+        fetchingData();
+    }, [currentItems]);
 
     // const getTotal = () => {
     //     // Returns the total cost of the items in the cart
@@ -74,9 +101,8 @@ export const Cart = () => {
                 
             </CartSideCard>
             <CartDetails>
-                {cartDetailsData.map(elt => {
-                    console.log(elt._id);
-                    console.log(currentItems);
+                {cartDetails.map(elt => {
+                    console.log(elt);
                     return (<CartItem 
                         key={elt._id}
                         id={elt._id}
