@@ -40,7 +40,7 @@ const App = () => {
             <Route path="/category/fitness" element={<Fitness />} />
             <Route path="/category/lifestyle" element={<Lifestyle />} />
             <Route path="/category/medical" element={<Medical />} />
-            <Route path="/category/industrial" element={<Industrial />} 
+            <Route path="/category/industrial" element={<Industrial />} />
             <Route path="/cart" element={<TestCart />} />
             <Route path="/category/pets" element={<Pets />} />
             <Route path="/category/gaming" element={<Gaming />} />
