@@ -7,6 +7,7 @@ import Header from "./Header";
 import Footer from "./Footer";
 import Homepage from "./Homepage";
 import AboutUs from "./AboutUs";
+import ItemDetails from "./ItemDetails";
 import Confirmation from "./Confirmation";
 import Login from "./Login";
 import TestCart from "./Cart/TestCart";
@@ -40,7 +41,8 @@ const App = () => {
             <Route path="/category/fitness" element={<Fitness />} />
             <Route path="/category/lifestyle" element={<Lifestyle />} />
             <Route path="/category/medical" element={<Medical />} />
-            <Route path="/category/industrial" element={<Industrial />} 
+            <Route path="/category/industrial" element={<Industrial />} />
+            <Route path="/category/lifestyle/:_id" element={<ItemDetails />} />
             <Route path="/cart" element={<TestCart />} />
             <Route path="/category/pets" element={<Pets />} />
             <Route path="/category/gaming" element={<Gaming />} />
@@ -63,7 +65,7 @@ const Wrapper = styled.div`
 `;
 
 const Main = styled.div`
-  height: 90vh;
+  height: 11000px;
   /* background-color: #ffffcc; yellow*/
   background-color: #ebf0fa;
 `;
