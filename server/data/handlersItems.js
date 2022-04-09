@@ -116,6 +116,7 @@ const updateProductCount = async (req, res) => {
 };
 //  .GET the category of the item by ID
 const getCategoryById = async (req, res) => {
+  console.log(MONGO_URI);
   const client = new MongoClient(MONGO_URI, options);
   const _id = req.params._id;
   try {

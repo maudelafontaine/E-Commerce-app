@@ -23,7 +23,7 @@ const Header = () => {
   return (
     <Container>
       <NavigationLink to="/" style={logoStyle}>
-        Random.co
+        RandomCo
         {/* <MdWatch size={"32px"} /> */}
       </NavigationLink>
       <SearchContainer>
