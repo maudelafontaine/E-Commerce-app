@@ -50,7 +50,7 @@ const reducer = (state, action) => {
                 newItems[item.id].numInCart = item.count;
             }
 
-            else if(newItems.hasOwnProperty(item.id) && item.count > 0){
+            else if(newItems.hasOwnProperty(item.id) && item.count === 0){
                 // Setting the item to 0 should remove it from the cart entirely
                 delete newItems[item.id];
             }
@@ -182,9 +182,9 @@ export const CartProvider = ({ children }) => {
         );
         return total;
     };
-
-    // 
-
+    
+    // return an array of ids of items in the cart
+    const getIds = () => Object.keys(state.currentItems)
 
     // TODO: implement this once the services are ready
     // const purchaseItemsInCart = () => {
@@ -204,6 +204,7 @@ export const CartProvider = ({ children }) => {
                     deleteItem,
                     // purchaseItemsInCart
                     getTotal,
+                    getIds,
                 }
             }}
         >
