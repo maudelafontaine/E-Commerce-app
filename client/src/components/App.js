@@ -14,6 +14,7 @@ import TestCart from "./Cart/TestCart";
 
 // import Cart from "./Cart";
 
+import Category from "./Categories/Category";
 import Entertainment from "./Categories/Entertainment";
 import Fitness from "./Categories/Fitness";
 import Lifestyle from "./Categories/Lifestyle";
@@ -37,15 +38,9 @@ const App = () => {
             <Route path="/" element={<Homepage />} />
             <Route path="/about" element={<AboutUs />} />
             <Route path="/wishlist" element={<Wishlist />} />
-            <Route path="/category/entertainment" element={<Entertainment />} />
-            <Route path="/category/fitness" element={<Fitness />} />
-            <Route path="/category/lifestyle" element={<Lifestyle />} />
-            <Route path="/category/medical" element={<Medical />} />
-            <Route path="/category/industrial" element={<Industrial />} />
+            <Route path="/category/:category" element={<Category/>} />
             <Route path="/category/lifestyle/:_id" element={<ItemDetails />} />
             <Route path="/cart" element={<TestCart />} />
-            <Route path="/category/pets" element={<Pets />} />
-            <Route path="/category/gaming" element={<Gaming />} />
             <Route path="/confirmation" element={<Confirmation />} />
             <Route path="/login" element={<Login />} />
           </Routes>
