@@ -2,6 +2,9 @@ import React, {useContext, useEffect, useState} from "react";
 import styled from 'styled-components';
 import CartContext from "../contexts/CartContext";
 import CartItem from "./CartItem";
+
+import { useNavigate } from "react-router-dom";
+
 import clone from "just-clone";
 // TODO: remove once endpoint is setup
 const cartDetailsData = [
@@ -29,9 +32,12 @@ const cartDetailsData = [
 
 export const Cart = () => {
     
+    const navigate = useNavigate();
+
     const [localTotal, setLocalTotal] = useState(null);
     const [cartDetails, setCartDetails] = useState([]);
     const [cartDetailsStatus, setCartDetailsStatus] = useState('waiting');
+    const [purchaseStatus, setPurchaseStatus] = useState('idle');
         
     const {
         currentItems,
@@ -50,14 +56,12 @@ export const Cart = () => {
         const payload = {ids: getIds()};
         const fetchingData = async () => {
             try{
-                const data = await fetch("/products/list", {
+                const data = await fetch("/product/list", {
                     method: "POST",
                     headers: { "Content-Type": "application/json" },
                     body: JSON.stringify(payload),
                 });
                 const json = await data.json();
-                console.log('json.data');
-                console.log(json);
                 setCartDetails(json.data);
                 setCartDetailsStatus('idle');
             }
@@ -70,23 +74,36 @@ export const Cart = () => {
         fetchingData();
     }, [currentItems]);
 
-    // const getTotal = () => {
-    //     // Returns the total cost of the items in the cart
-    //     const total =  Object.keys(currentItems).reduce(
-    //         (previousValue, currentValue) => {
-    //             // previousValue is the total cost so far
-    //             // currentValue is the key of the current item in the cart
-    //             console.log(currentValue);
-    //             console.log(previousValue);
-    //             const currentItem = currentItems[currentValue];
-    //             return previousValue + currentItem.price;
-    //         }, 0
-    //     );
-    //     return total;
-    // };
+    const purchaseItems = async () => {
+        const itemsToPurchase = cartDetails.map(item => {
+            const payloadItem = {_id: item._id, count: currentItems[item._id].numInCart};
+            return payloadItem;
+        }
+        );
+        
+        const message = {items: itemsToPurchase};
+        setPurchaseStatus('waiting');
+        const rawResp = await fetch('/product/purchase', {
+            method:'PATCH',
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(message)
+        });
+        if(rawResp.status > 400){
+            setPurchaseStatus('error');
+        }
 
-    // TODO: Make call to populate cart item details on component load
-    // useEffect(() => {console.log('hello'); console.log(currentItems)}, [])
+        else{
+            const content = await rawResp.json();
+            setPurchaseStatus('completed');
+            navigate('/confirmation');
+        }
+        
+        
+    };
+
     return(
         <CartWrapper>
             <CartSideCard>
@@ -102,22 +119,22 @@ export const Cart = () => {
             </CartSideCard>
             <CartDetails>
                 {cartDetails.map(elt => {
-                    console.log(elt);
+
                     return (<CartItem 
                         key={elt._id}
                         id={elt._id}
                         name={elt.name} 
-                        price={elt.price} 
-                        imageSrc={elt.imageSrc}
-                        // TODO: Change below so we properly get the count 
-                        // count={1}
+                        price={elt.price}
+                        imageSrc={elt.imageSrc} 
                         count={currentItems[elt._id] && currentItems[elt._id].numInCart}
                     />)
                 })}
-                <UpdateButton>Update Cart</UpdateButton>
-                <SellerInstructions></SellerInstructions>
+                <div>
+                    Seller Instructions
+                </div>
+                <SellerInstructions rows={4} cols={50}></SellerInstructions>
                 <Total amt={getTotal()}/>
-                <CheckoutButton></CheckoutButton>
+                <CheckoutButton onClick={purchaseItems}>Checkout</CheckoutButton>
             </CartDetails>
         </CartWrapper>
     );
@@ -153,8 +170,11 @@ const UpdateButton = styled.button`
     /* TODO: see what can be taken from global styles */
 `;
 
-const SellerInstructions = styled.input`
-    /* TODO: see what can be taken from global styles */
+const SellerInstructions = styled.textarea`
+    outline: none;
+    border: none;
+    resize: none;
+    margin: 10px 0px;
 `;
 
 const Total = ({ amt }) => {
@@ -166,7 +186,8 @@ const Total = ({ amt }) => {
 }
 
 const TotalText = styled.span`
-    /* TODO: see what can be taken from global styles */
+    font-weight: bold;
+    font-size: 20pt;
 `;
 
 const TotalAmt = styled.span`
@@ -178,7 +199,10 @@ const CartDetails = styled.div`
 `;
 
 const CheckoutButton = styled.button`
-
+    margin-top: 10px;
+    color: black;
+    border: none;
+    background-color: darkgray;
 `;
 
 

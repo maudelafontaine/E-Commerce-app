@@ -9,6 +9,7 @@ const {
   getCategoryById,
   getProductsByCategories,
   getProductsInList,
+  purchaseProducts,
 } = require("./data/handlersItems");
 const { getCompanies, getCompanyById } = require("./data/handlersCompanies");
 
@@ -37,8 +38,9 @@ express()
   .get("/product/:_id", getProduct)
   .post("/product/category", getProductsByCategories)
   .get("/product/categories/:_id", getCategoryById)
-  .post("/products/list", getProductsInList)
+  .post("/product/list", getProductsInList)
   .patch("/product/purchase/:_id", updateProductCount)
+  .patch("/product/purchase", purchaseProducts)
   .get("/companies", getCompanies)
   .get("/companies/:_id", getCompanyById)
 

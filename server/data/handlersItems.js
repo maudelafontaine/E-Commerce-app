@@ -1,7 +1,7 @@
 const { response } = require("express");
 const { MongoClient } = require("mongodb");
 require("dotenv").config();
-console.log(process.env);
+
 const { MONGO_URI } = process.env;
 const options = {
   useNewUrlParser: true,
@@ -62,7 +62,6 @@ const getProductsInList = async (req, res) => {
     await client.connect();
     const db = client.db("Commerce");
     const items = await db.collection('items').find({"_id" : {"$in": ids}}).toArray();
-    // console.log(items);
     res.status(200).json({
       status: 200,
       message: "Success",
@@ -83,6 +82,57 @@ const getProductsInList = async (req, res) => {
   finally{
     client.close();
   }
+};
+//        .PATCH mark items as purchased by decrementing their counts by the specified amounts
+const purchaseProducts = async (req, res) => {
+  const client = new MongoClient(MONGO_URI, options);
+  // we are expecting an array that looks like [{id1, count1}, {id2, count2},...]
+  const { items } = req.body;
+  let error = false;
+  for(let i = 0; i < items.length; i++){
+    if(error) return;
+    const item = items[i];
+      try{
+        await client.connect();
+        const db = client.db("Commerce");
+        const {_id, count } = item;
+        const itemInDb = await db.collection('items').findOne({ _id: parseInt(_id)});
+        const numInStock = itemInDb.numInStock;
+  
+        if(numInStock === 0){
+          throw new Error(`Item ${_id} is out of stock!`);
+        }
+  
+        else if(numInStock - count < 0){
+          throw new Error(`Cannot purchase quantity ${count} of item ${_id}`);
+        }
+  
+        else{
+          const newItemData = {$set : {numInStock: (numInStock - count)}}
+          const result = await db
+            .collection("items")
+            .updateOne({ _id: parseInt(_id) }, newItemData);
+          console.log(result);
+        }
+      }
+  
+      catch(err){
+        console.log(err);
+        error = true;
+        res.status(500).json({
+          status: 500,
+          data: req.body,
+          message: "The server couldn't get the information!",
+        });
+
+      }
+  
+      finally{
+        client.close();
+      }
+    };  
+  
+  if(!error) res.status(201).json({ status: 201, data: "items purchased" });
 };
 
 //        .PATCH/ decrement the number of the items
@@ -116,7 +166,7 @@ const updateProductCount = async (req, res) => {
 };
 //  .GET the category of the item by ID
 const getCategoryById = async (req, res) => {
-  console.log(MONGO_URI);
+
   const client = new MongoClient(MONGO_URI, options);
   const _id = req.params._id;
   try {
@@ -133,7 +183,7 @@ const getCategoryById = async (req, res) => {
 };
 // .GET the items by the category
 const getProductsByCategories = async (req, res) => {
-  console.log(MONGO_URI);
+
   const client = new MongoClient(MONGO_URI, options);
   const { category } = req.body;
   try {
@@ -156,5 +206,6 @@ module.exports = {
   updateProductCount,
   getCategoryById,
   getProductsByCategories,
-  getProductsInList
+  getProductsInList,
+  purchaseProducts,
 };
