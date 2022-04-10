@@ -16,8 +16,10 @@ const Header = () => {
     textDecoration: "none",
     // color: " #003399",
     // color: "#fff2e6",
-    color: "#003399",
+    color: "white",
+    // color: "#003399",
     fontWeight: "bold",
+    fontFamily: "'Roboto', sans-serif",
   };
 
   return (
@@ -73,7 +75,7 @@ const Container = styled.div`
   flex-direction: row;
   align-items: center;
   justify-content: space-around;
-  background-color: #4775d1;
+  background-color: #ff6666;
   height: 10vh;
 `;
 
@@ -107,12 +109,13 @@ const DropdownBtn = styled.button`
   font-family: Arial, Helvetica, sans-serif;
   font-weight: bold;
   font-size: 22px;
-  background-color: #4775d1;
+  background-color: #ff6666;
   padding: 10px;
   border: none;
 
   &:hover {
-    color: #ebf0fa;
+    color: #ffe6e6;
+    background-color: #ff6666;
   }
 `;
 
@@ -120,40 +123,43 @@ const Link = styled(NavLink)`
   color: black;
   padding: 12px 16px;
   text-decoration: none;
-  border-left: 5px solid #003399;
+  border-left: 5px solid #ff6666;
   display: block;
   font-weight: bold;
 
   &:hover {
     cursor: pointer;
-    text-decoration-color: #ebf0fa;
-    color: #ebf0fa;
+    /* text-decoration-color: #ebf0fa; */
+    color: #ccd9ff;
   }
 `;
 
 const Dropdown = styled.div`
   position: relative;
   display: inline-block;
-  background-color: #4775d1;
+  /* background-color: #4775d1; */
+  /* background-color: yellow; */
   font-family: var(--font-body);
   font-size: 18px;
   margin-right: 16px;
 
   &:hover ${DropdownContent} {
     display: block;
-    background-color: #ccd9ff;
+    /* background-color: #ccd9ff; mauve */
+    background-color: white;
     color: #ebf0fa;
   }
 
   &:hover ${DropdownBtn} {
-    background-color: #4775d1;
-    color: #ebf0fa;
+    /* background-color: #4775d1; */
+    /* color: #ebf0fa; */
+    color: white;
   }
 `;
 
 // Links (login, wishlist, cart )
 const NavigationLink = styled(NavLink)`
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: "Roboto", sans-serif;
   font-size: 22px;
   font-weight: bold;
   color: white;
@@ -165,7 +171,8 @@ const NavigationLink = styled(NavLink)`
     /* text-decoration: underline;
     text-decoration-color: #ebf0fa;
     text-decoration-thickness: 3px; */
-    color: #ebf0fa;
+    /* color: #ebf0fa; */
+    border-bottom: 3px solid black;
   }
 `;
 

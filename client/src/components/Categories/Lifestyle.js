@@ -3,6 +3,8 @@
 import { useEffect, useState } from "react";
 import styled from "styled-components";
 import { NavLink } from "react-router-dom";
+import Loader from "../Loader";
+import Pagination from "../Pagination";
 
 const Lifestyle = () => {
   const lifestyle = { category: "Lifestyle" };
@@ -23,11 +25,11 @@ const Lifestyle = () => {
   const arrayData = item.data;
 
   if (!item.data) {
-    return <div>Loading...</div>;
+    return <Loader />;
   }
 
   return (
-    <>
+    <Wrapper>
       <Banner>
         <Text>Lifestyle</Text>
       </Banner>
@@ -48,7 +50,8 @@ const Lifestyle = () => {
             </Item>
           ))}
       </ListContainer>
-    </>
+      <Pagination />
+    </Wrapper>
   );
 };
 
@@ -56,6 +59,9 @@ export default Lifestyle;
 
 // Styles :
 
+const Wrapper = styled.div`
+  background-color: #f5f5f5;
+`;
 // Banner container
 const Banner = styled.div`
   height: 200px;
@@ -70,7 +76,8 @@ const Banner = styled.div`
 const Text = styled.h2`
   font-size: 35px;
   color: black;
-  border-bottom: 6px solid #003399;
+  border-bottom: 6px solid #b3c6ff;
+  font-family: "Roboto", sans-serif;
 `;
 
 const Dropdown = styled.div`
@@ -82,6 +89,7 @@ const Dropdown = styled.div`
   display: flex;
   flex-direction: row;
   justify-content: flex-end;
+  background-color: #f5f5f5;
 `;
 
 const SortBy = styled.input`
@@ -95,6 +103,7 @@ const ListContainer = styled.div`
   display: grid;
   grid-template-columns: repeat(4, 1fr);
   gap: 10px;
+  background-color: #f5f5f5;
 `;
 
 // For each item
@@ -116,9 +125,9 @@ const Picture = styled.img`
   border-radius: 2px;
   margin-bottom: 20px;
   align-self: center;
-  border-left: 5px solid red;
-  border-bottom: 5px solid red;
-  border: 3px solid black;
+  /* border-left: 5px solid red;
+  border-bottom: 5px solid red; */
+  /* border: 3px solid black; */
   /* width: 180px;
   height: 200px; */
 
