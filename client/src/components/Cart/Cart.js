@@ -41,13 +41,13 @@ export const Cart = () => {
         
     const {
         currentItems,
-            actions:{
-                setItemNumber,
-                addItem,
-                removeItem,
-                deleteItem,
-                getTotal,
-                getIds
+        actions:{
+            setItemNumber,
+            addItem,
+            removeItem,
+            deleteItem,
+            getTotal,
+            getIds
             }
     } = useContext(CartContext);
 

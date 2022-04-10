@@ -7,12 +7,16 @@ import { ROUTE_CATEGORY_MAP } from "./CategoryMapping";
 
 
 const Category = () => {
-
+  // tracks the state of the service call to get all items in a category
   const [itemDataStatus, setItemDataStatus] = useState('waiting');
+  // tracks all the items in this category
+  const [item, setItem] = useState([]);
+  // what kind of items are we searching for?
   const {category} = useParams();
   const categoryTransformed = ROUTE_CATEGORY_MAP[category];
   const payload = { category: categoryTransformed };
-  const [item, setItem] = useState([]);
+  
+  
   useEffect(() => {
     setItemDataStatus("loading");
     const fetchingData = async () => {

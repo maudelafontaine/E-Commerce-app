@@ -18,7 +18,7 @@ export const CartItem = ({id, name, price, imageSrc, count}) => {
     } = useContext(CartContext);
  
     const handleChange = (evt) => {
-
+        // no need to pass a price, since we already have this i
         setItemNumber({id, count: parseInt(evt.target.value)});
     }
 

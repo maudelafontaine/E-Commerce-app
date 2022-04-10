@@ -55,6 +55,12 @@ const reducer = (state, action) => {
                 delete newItems[item.id];
             }
 
+
+            else if(!newItems.hasOwnProperty(item.id)){
+                // This case handles the creation of a new item in the cart.
+                newItems[item.id] = {count: item.count, price: item.price };
+            }
+
             return {
                 ...state,
                 currentItems: newItems,
