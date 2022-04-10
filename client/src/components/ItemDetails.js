@@ -1,38 +1,46 @@
 // Item details component : when user clicks on an item, it gets redirected to a detailed page of the item
 
-import React from "react";
+import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import { useParams } from "react-router-dom";
 import { AiFillHeart } from "react-icons/ai";
+import Loader from "./Loader";
 
 const ItemDetails = () => {
   // get product by id : "/product/:_id"
-  const { _id } = useParams;
-  const [item, setItem] = React.useState("");
+  const { _id } = useParams();
+  const [item, setItem] = useState("");
+  const [increment, setIncrement] = useState("");
+  const [decrement, setDecrement] = useState("");
 
-  // React.useEffect(() => {
-  //   fetch(`/product/${_id}`)
-  //     .then((res) => res.json())
-  //     .then((data) => {
-  //       setItem(data.data);
-  //       console.log(data.data);
-  //     });
-  // }, []);
+  useEffect(() => {
+    const findItem = async () => {
+      const res = await fetch(`/product/${_id}`);
+      const data = await res.json();
+      console.log(data.data);
+      setItem(data.data);
+    };
+    findItem();
+  }, [_id]);
 
-  // if (!item) {
-  //   return <div>Loading...</div>;
-  // }
+  if (!item) {
+    return <Loader />;
+  }
+  console.log(item.imageSrc);
 
   return (
     <Container>
       <PictureContainer>
-        <Picture>Picture</Picture>
+        <Picture src={item.imageSrc} />
       </PictureContainer>
       <DetailsContainer>
-        <Name>Watch</Name>
-        <Price>$25</Price>
+        <Name>{item.name}</Name>
+        <Price>{item.price}</Price>
+
         <AddToCartContainer>
+          <Increment>+</Increment>
           <Quantity>1</Quantity>
+          <Decrement>-</Decrement>
           <AddToCartBtn>ADD TO CART</AddToCartBtn>
           <AddToWishList>
             <AiFillHeart />
@@ -50,8 +58,8 @@ const Container = styled.div`
   flex-direction: row;
   justify-content: space-evenly;
   height: 1000px;
-  background-color: pink;
-  border: 2px solid yellow;
+  /* background-color: pink; */
+  /* border: 4px solid black; */
 `;
 
 const PictureContainer = styled.div`
@@ -59,14 +67,14 @@ const PictureContainer = styled.div`
   flex-direction: row;
   justify-content: center;
   align-items: center;
-  border: 3px solid black;
+  /* border: 3px solid black; */
   flex-basis: auto;
   width: 400px;
   background-color: white;
 `;
 
-const Picture = styled.h2`
-  color: black;
+const Picture = styled.img`
+  border: 4px solid black;
 `;
 
 const DetailsContainer = styled.div`
@@ -74,8 +82,8 @@ const DetailsContainer = styled.div`
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  border: 3px solid black;
-  flex-basis: auto;
+  /* border: 3px solid black; */
+  /* flex-basis: auto; */
   width: 400px;
   background-color: white;
 `;
@@ -95,6 +103,10 @@ const AddToCartContainer = styled.div`
   justify-content: space-around;
   align-items: center;
 `;
+
+const Increment = styled.button``;
+
+const Decrement = styled.button``;
 
 const Quantity = styled.button`
   width: 80px;
@@ -134,3 +146,6 @@ const AddToWishList = styled.div`
   cursor: pointer;
   /* height: 40px; */
 `;
+
+// Notes :
+// https://www.w3schools.com/howto/tryit.asp?filename=tryhow_css_loader

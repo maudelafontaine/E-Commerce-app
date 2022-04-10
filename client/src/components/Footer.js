@@ -67,7 +67,8 @@ export default Footer;
 
 // Footer container
 const Container = styled.div`
-  background-color: #c0c0c0;
+  /* background-hicolor: #c0c0c0; */
+  background-color: #ff9999;
   display: flex;
   flex-direction: row;
   justify-content: space-around;

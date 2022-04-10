@@ -62,5 +62,6 @@ const Wrapper = styled.div`
 const Main = styled.div`
   height: 11000px;
   /* background-color: #ffffcc; yellow*/
-  background-color: #ebf0fa;
+  /* background-color: #ebf0fa; */
+  background-color: #f5f5f5;
 `;
