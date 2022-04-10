@@ -144,8 +144,7 @@ export const CartProvider = ({ children }) => {
     }
 
     const addItem = (data) => {
-        console.log('adding item');
-        console.log(data);
+
         dispatch({
             type:'add-item',
             data,
@@ -172,11 +171,8 @@ export const CartProvider = ({ children }) => {
             (previousValue, currentValue) => {
                 // previousValue is the total cost so far
                 // currentValue is the key of the current item in the cart
-                console.log(currentValue);
-                console.log(previousValue);
+
                 const currentItem = state.currentItems[currentValue];
-                console.log('count ', currentItem.count);
-                console.log('price ', currentItem.price);
                 return previousValue + (currentItem.numInCart *  currentItem.price);
             }, 0
         );

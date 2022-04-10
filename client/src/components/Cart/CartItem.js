@@ -3,7 +3,7 @@ import styled from "styled-components";
 
 import CartContext from "../contexts/CartContext";
 
-import { IoClose} from 'react-icons/io5';
+import { IoClose } from 'react-icons/io5';
 
 import SquareImage from "../SquareImage";
 
@@ -18,10 +18,14 @@ export const CartItem = ({id, name, price, imageSrc, count}) => {
     } = useContext(CartContext);
  
     const handleChange = (evt) => {
-        // console.log(evt.target.value + ' ' + id);
+
         setItemNumber({id, count: parseInt(evt.target.value)});
     }
 
+    const handleRemoveFromCart = (evt) => {
+        setItemNumber({id, count:0});
+    }
+  
     return(
         <CartItemWrapper>
             <Item>
@@ -35,11 +39,11 @@ export const CartItem = ({id, name, price, imageSrc, count}) => {
                 <NumberSelector
                     min={0}
                     max={20}
-                    defaultValue={1}
+                    defaultValue={count}
                     type="number"
                     onChange = {handleChange}
                 />
-                <RemoveFromCartButton>
+                <RemoveFromCartButton onClick={handleRemoveFromCart}>
                     <IoClose/>
                 </RemoveFromCartButton>
             </InputContainer>
