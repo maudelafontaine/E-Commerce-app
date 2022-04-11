@@ -4,7 +4,7 @@ import React from "react";
 import styled from "styled-components";
 
 const Wishlist = () => {
-  return <div>wishlist</div>;
+  return <div>Wishlist</div>;
 };
 
 export default Wishlist;

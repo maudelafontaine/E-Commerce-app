@@ -3,6 +3,9 @@
 import React from "react";
 import styled from "styled-components";
 import { useNavigate } from "react-router-dom";
+import { FiTruck } from "react-icons/fi";
+import { BsBag } from "react-icons/bs";
+import { AiOutlineTags } from "react-icons/ai";
 
 const Homepage = () => {
   let navigate = useNavigate();
@@ -13,11 +16,26 @@ const Homepage = () => {
 
   return (
     <Container>
-      {/* <Picture src="/assets/dog.jpg" /> */}
-      <Message>
-        Get -25% on our <strong>Lifestyle</strong> collection
-      </Message>
-      <Btn onClick={handleClick}>Shop now</Btn>
+      <PromotionContainer>
+        <Picture src="/assets/heart.png" />
+        <Divider>
+          <Message>Up to 40% Off on our Lifestyle collection</Message>
+          <Btn onClick={handleClick}>Shop now</Btn>
+        </Divider>
+      </PromotionContainer>
+      <DetailsContainer>
+        <Text>
+          <FiTruck /> Free shipping on orders over $100
+        </Text>
+        <Text>
+          {" "}
+          <BsBag /> Free returns by Mail
+        </Text>
+        <Text>
+          {" "}
+          <AiOutlineTags /> Price match guarantee{" "}
+        </Text>
+      </DetailsContainer>
     </Container>
   );
 };
@@ -29,15 +47,40 @@ const Container = styled.div`
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  background-color: #f5f5f5;
+  /* background-color: #adebeb; */
+  height: 700px;
 `;
 
-// const Picture = styled.img`
-//   width: 50%;
-//   height: 50%;
-//   margin-top: 50px;
-//   margin-bottom: 30px;
-//   border-radius: 10px;
-// `;
+const PromotionContainer = styled.div`
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  background-color: #ffe6e6;
+  padding-left: 80px;
+  padding-right: 80px;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  border-radius: 10px;
+  margin-top: 20px;
+`;
+
+const Picture = styled.img`
+  width: 500px;
+  height: 400px;
+  margin-top: 50px;
+  margin-bottom: 30px;
+  border-radius: 10px;
+  border-radius: 5px;
+`;
+
+const Divider = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin-left: 50px;
+`;
 
 const Message = styled.h2`
   color: black;
@@ -46,8 +89,9 @@ const Message = styled.h2`
   background-color: white;
   padding: 22px;
   border-style: solid;
-  border-color: #003399;
+  /* border-color: #003399; */
   border-width: 4px;
+  font-size: 25px;
 `;
 
 const Btn = styled.button`
@@ -57,12 +101,39 @@ const Btn = styled.button`
   height: 60px;
   border-color: white;
   font-weight: bold;
-  color: #003399;
-  /* color: white; */
-  background-color: #ccd9ff;
+  /* color: #003399; */
+  color: white;
+  background-color: #adebeb;
   border: none;
   cursor: pointer;
+
+  &:hover {
+    color: black;
+  }
+`;
+
+const DetailsContainer = styled.div`
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  margin-top: 60px;
+  margin-bottom: 20px;
+`;
+
+const Text = styled.h2`
+  color: black;
+  padding: 20px;
+  background-color: white;
+  margin: 8px;
+  border-radius: 2px;
+  font-size: 18px;
 `;
 
 // Ideas :
 // browse by category
+
+/* <Message>
+        Get -25% on our <strong>Lifestyle</strong> collection
+      </Message>
+*/

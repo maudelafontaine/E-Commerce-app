@@ -10,8 +10,10 @@ const ItemDetails = () => {
   // get product by id : "/product/:_id"
   const { _id } = useParams();
   const [item, setItem] = useState("");
-  const [increment, setIncrement] = useState("");
-  const [decrement, setDecrement] = useState("");
+  const [qty, setQty] = useState(0);
+
+  // const [increment, setIncrement] = useState("");
+  // const [decrement, setDecrement] = useState("");
 
   useEffect(() => {
     const findItem = async () => {
@@ -26,7 +28,17 @@ const ItemDetails = () => {
   if (!item) {
     return <Loader />;
   }
-  console.log(item.imageSrc);
+  const handleChange = (e) => {
+    console.log(e.target.value);
+  };
+
+  const handleIncrement = () => {
+    setQty(qty + 1);
+  };
+
+  const handleDecrement = () => {
+    setQty(qty - 1);
+  };
 
   return (
     <Container>
@@ -38,9 +50,13 @@ const ItemDetails = () => {
         <Price>{item.price}</Price>
 
         <AddToCartContainer>
-          <Increment>+</Increment>
-          <Quantity>1</Quantity>
-          <Decrement>-</Decrement>
+          <Increment onClick={handleIncrement}>&#43;</Increment>
+          <Quantity
+            value={qty}
+            placeholder="1"
+            onChange={handleChange}
+          ></Quantity>
+          <Decrement onClick={handleDecrement}>&#45;</Decrement>
           <AddToCartBtn>ADD TO CART</AddToCartBtn>
           <AddToWishList>
             <AiFillHeart />
@@ -57,7 +73,7 @@ const Container = styled.div`
   display: flex;
   flex-direction: row;
   justify-content: space-evenly;
-  height: 1000px;
+  height: 700px;
   /* background-color: pink; */
   /* border: 4px solid black; */
 `;
@@ -74,7 +90,7 @@ const PictureContainer = styled.div`
 `;
 
 const Picture = styled.img`
-  border: 4px solid black;
+  /* border: 4px solid black; */
 `;
 
 const DetailsContainer = styled.div`
@@ -82,19 +98,20 @@ const DetailsContainer = styled.div`
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  /* border: 3px solid black; */
-  /* flex-basis: auto; */
   width: 400px;
-  background-color: white;
 `;
 
 const Name = styled.h2`
   color: black;
-  font-size: 24px;
+  font-size: 22px;
+  padding: 10px;
 `;
 
 const Price = styled.h2`
   color: black;
+  padding: 10px;
+  margin-bottom: 20px;
+  font-size: 18px;
 `;
 
 const AddToCartContainer = styled.div`
@@ -104,19 +121,39 @@ const AddToCartContainer = styled.div`
   align-items: center;
 `;
 
-const Increment = styled.button``;
-
-const Decrement = styled.button``;
-
-const Quantity = styled.button`
-  width: 80px;
-  height: 50px;
+const Increment = styled.button`
   border: none;
-  border-radius: 4px;
+  color: black;
+  background-color: #ffe6e6;
+  padding-left: 10px;
+  padding-right: 10px;
+  width: 30px;
+  margin-right: 5px;
+`;
 
-  &:hover {
+const Decrement = styled.button`
+  border: none;
+  color: black;
+  background-color: #ffe6e6;
+  padding-left: 10px;
+  padding-right: 10px;
+  width: 30px;
+  margin-left: 5px;
+  margin-right: 20px;
+`;
+
+const Quantity = styled.input`
+  width: 20px;
+  height: 30px;
+  border: none;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  border-radius: 4px;
+  color: black;
+
+  /* &:hover {
     cursor: pointer;
-  }
+  } */
 `;
 
 const AddToCartBtn = styled.button`
@@ -134,7 +171,7 @@ const AddToCartBtn = styled.button`
 `;
 
 const AddToWishList = styled.div`
-  background-color: pink;
+  background-color: #ff6666;
   border-radius: 50px;
   width: 30px;
   height: 30px;
@@ -142,7 +179,7 @@ const AddToWishList = styled.div`
   flex-direction: row;
   justify-content: center;
   align-items: center;
-  margin-left: 10px;
+  margin-left: 20px;
   cursor: pointer;
   /* height: 40px; */
 `;

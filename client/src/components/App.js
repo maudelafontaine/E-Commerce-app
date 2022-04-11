@@ -8,9 +8,8 @@ import Footer from "./Footer";
 import Homepage from "./Homepage";
 import AboutUs from "./AboutUs";
 import ItemDetails from "./ItemDetails";
-import Confirmation from "./Confirmation";
-import Login from "./Login";
 import TestCart from "./Cart/TestCart";
+import Confirmation from "./Confirmation";
 
 // import Cart from "./Cart";
 
@@ -25,6 +24,7 @@ import Industrial from "./Categories/Industrial";
 
 // Stretch
 import Wishlist from "./Wishlist";
+import Login from "./Login";
 
 const App = () => {
   return (
@@ -37,11 +37,12 @@ const App = () => {
           <Routes>
             <Route path="/" element={<Homepage />} />
             <Route path="/about" element={<AboutUs />} />
-            <Route path="/wishlist" element={<Wishlist />} />
-            <Route path="/category/:category" element={<Category/>} />
-            <Route path="/category/lifestyle/:_id" element={<ItemDetails />} />
+            <Route path="/category/:category" element={<Category />} />
+            {/* <Route path="/category/lifestyle/:_id" element={<ItemDetails />} /> */}
+            <Route path="/item/:_id" element={<ItemDetails />} />
             <Route path="/cart" element={<TestCart />} />
             <Route path="/confirmation" element={<Confirmation />} />
+            <Route path="/wishlist" element={<Wishlist />} />
             <Route path="/login" element={<Login />} />
           </Routes>
         </Main>
@@ -60,8 +61,6 @@ const Wrapper = styled.div`
 `;
 
 const Main = styled.div`
-  height: 11000px;
-  /* background-color: #ffffcc; yellow*/
-  /* background-color: #ebf0fa; */
+  font-family: "Roboto", sans-serif;
   background-color: #f5f5f5;
 `;
