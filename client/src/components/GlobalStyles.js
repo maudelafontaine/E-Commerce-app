@@ -63,7 +63,7 @@ h3,
 label,
 button {
   color: #fff;
-  font-family: var(--font-heading);
+  font-family: "Roboto", sans-serif;
   font-size: 20px;
   text-align: center;
 }
@@ -72,7 +72,7 @@ a,
 li,
 blockquote,
 input {
-  font-family: var(--font-body);
+  font-family: "Roboto", sans-serif;
   font-size: 18px ;
   margin: 4px;
 }
@@ -88,3 +88,9 @@ input {
 
 
 `;
+
+// font-family: "Roboto", sans-serif;
+
+// To make use of the var in style-components :
+// color: var(--color-cadmium-red);
+// font-family: var(--font-body);

@@ -18,21 +18,20 @@ const Footer = () => {
         <ul
           style={{
             fontSize: "22px",
-            fontFamily: "var(--font-body)",
+            fontFamily: "Roboto, sans-serif",
             fontWeight: "bold",
-            color: "#003399",
+            color: "#adebeb",
+            marginBottom: "10px",
           }}
         >
           MENU
         </ul>
-        <nav>
-          <NavigationLink
-            to="/about"
-            style={{ fontFamily: "var(--font-body)" }}
-          >
-            About us
-          </NavigationLink>
-        </nav>
+        <NavigationLink
+          to="/about"
+          style={{ fontFamily: "Roboto, sans-serif" }}
+        >
+          About us
+        </NavigationLink>
         <li>Contact</li>
         <li>Terms of Service</li>
         <li>Returns</li>
@@ -42,7 +41,15 @@ const Footer = () => {
         <li>Privacy policy</li>
       </Menu>
       <SocialMedia>
-        <h2 style={{ color: "#003399", fontSize: "22px" }}>SOCIAL LINKS</h2>
+        <h2
+          style={{
+            color: "#adebeb",
+            fontSize: "22px",
+            fontFamily: "Roboto, sans-serif",
+          }}
+        >
+          SOCIAL LINKS
+        </h2>
         <Icons>
           <AiFillInstagram size={33} />
           <AiFillFacebook size={33} />
@@ -51,7 +58,13 @@ const Footer = () => {
         </Icons>
       </SocialMedia>
       <Newsletter>
-        <h2 style={{ color: "#003399", fontSize: "22px" }}>
+        <h2
+          style={{
+            color: "#adebeb",
+            fontSize: "22px",
+            fontFamily: "Roboto, sans-serif",
+          }}
+        >
           NEWSLETTER SIGN UP
         </h2>
         <Signup placeholder="Enter you email"></Signup>
@@ -67,12 +80,11 @@ export default Footer;
 
 // Footer container
 const Container = styled.div`
-  /* background-hicolor: #c0c0c0; */
   background-color: #ff9999;
   display: flex;
   flex-direction: row;
   justify-content: space-around;
-  height: 250px;
+  height: 265px;
 `;
 
 // Footer menu container
@@ -87,7 +99,7 @@ const Menu = styled.div`
 
 // About us page link
 const NavigationLink = styled(NavLink)`
-  font-family: var(--font-body);
+  font-family: "Roboto", sans-serif;
   font-size: 18px;
   /* font-weight: bold; */
   color: #ebf0fa;
@@ -95,7 +107,7 @@ const NavigationLink = styled(NavLink)`
   margin: 4px;
 
   &:hover {
-    color: #4775d1;
+    color: black;
     cursor: pointer;
   }
 `;
@@ -107,6 +119,10 @@ const Icons = styled.div`
   margin-top: 10px;
   align-items: center;
   justify-content: space-between;
+
+  &:hover {
+    cursor: pointer;
+  }
 `;
 
 // List of social media icons
@@ -124,6 +140,7 @@ const Newsletter = styled.div`
   color: #003399;
   display: flex;
   flex-direction: column;
+  align-items: center;
 `;
 
 // Newsletter input
@@ -131,10 +148,26 @@ const Signup = styled.input`
   margin-top: 5px;
   border-color: white;
   font-size: 18px;
+  border-radius: 2px;
+  border: none;
+  width: 200px;
+  height: 40px;
+  margin-top: 14px;
 `;
 
 // Sign in for newsletter button
 const Btn = styled.button`
   background-color: black;
   font-size: 20px;
+  border-radius: 2px;
+  border: none;
+  width: 100px;
+  height: 50px;
+  padding: 8px;
+  font-family: "Roboto", sans-serif;
+  margin-top: 5px;
+
+  &:hover {
+    cursor: pointer;
+  }
 `;

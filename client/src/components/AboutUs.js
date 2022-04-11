@@ -27,12 +27,12 @@ const Container = styled.div`
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  padding-top: 50px;
+  height: 700px;
 `;
 
 const Title = styled.h2`
-  color: #003399;
-  font-size: 30px;
+  color: #adebeb;
+  font-size: 34px;
   font-weight: bold;
   margin-bottom: 38px;
 `;
