@@ -83,6 +83,7 @@ const Divider = styled.div`
 `;
 
 const Message = styled.h2`
+  position: relative;
   color: black;
   margin-top: 10px;
   margin-bottom: 8px;
@@ -95,6 +96,7 @@ const Message = styled.h2`
 `;
 
 const Btn = styled.button`
+  position: relative;
   margin-top: 10px;
   border-radius: 5px;
   width: 130px;

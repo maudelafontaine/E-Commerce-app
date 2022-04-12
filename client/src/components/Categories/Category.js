@@ -10,6 +10,7 @@ import Loader from "../Loader";
 const Category = () => {
   // tracks the state of the service call to get all items in a category
   const [itemDataStatus, setItemDataStatus] = useState("waiting");
+  const [page, setPage] = useState(0);
   // tracks all the items in this category
   const [item, setItem] = useState([]);
   // what kind of items are we searching for?
@@ -20,24 +21,25 @@ const Category = () => {
   useEffect(() => {
     setItemDataStatus("loading");
     const fetchingData = async () => {
-      const data = await fetch("/product/category", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(payload),
-      });
+      const data = await fetch(
+        `/product/category?category=${categoryTransformed}&page=${page}`,
+        {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(payload),
+        }
+      );
       const json = await data.json();
       setItemDataStatus("idle");
       setItem(json);
     };
     fetchingData().catch(console.error);
-  }, [category]);
+  }, [category, page]);
 
-  const arrayData = item.data;
-
+  let arrayData = item.data;
   if (itemDataStatus === "loading") {
     return <Loader />;
   }
-
   return (
     <>
       <Banner>
@@ -60,7 +62,7 @@ const Category = () => {
             </Item>
           ))}
       </ListContainer>
-      <Pagination />
+      <Pagination page={page} setPage={setPage} />
     </>
   );
 };
