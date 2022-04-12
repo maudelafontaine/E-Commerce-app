@@ -3,6 +3,8 @@
 import React from "react";
 import styled from "styled-components";
 import { useNavigate } from "react-router-dom";
+// import Background from "./Background";
+import BackgroundImg from "././img/example-2.svg";
 
 const Homepage = () => {
   let navigate = useNavigate();
@@ -12,13 +14,15 @@ const Homepage = () => {
   };
 
   return (
-    <Container>
-      {/* <Picture src="/assets/dog.jpg" /> */}
-      <Message>
-        Get -25% on our <strong>Lifestyle</strong> collection
-      </Message>
-      <Btn onClick={handleClick}>Shop now</Btn>
-    </Container>
+    <>
+      <Container>
+        {/* <Picture src="/assets/dog.jpg" /> */}
+        <Message>
+          Get -25% on our <strong>Lifestyle</strong> collection
+        </Message>
+        <Btn onClick={handleClick}>Shop now</Btn>
+      </Container>
+    </>
   );
 };
 
@@ -29,6 +33,12 @@ const Container = styled.div`
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  background-image: url(${BackgroundImg});
+  width: 99.1vw;
+  height: 100vh;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
 `;
 
 // const Picture = styled.img`
@@ -40,6 +50,7 @@ const Container = styled.div`
 // `;
 
 const Message = styled.h2`
+  position: relative;
   color: black;
   margin-top: 10px;
   margin-bottom: 8px;
@@ -51,6 +62,7 @@ const Message = styled.h2`
 `;
 
 const Btn = styled.button`
+  position: relative;
   margin-top: 10px;
   border-radius: 5px;
   width: 130px;

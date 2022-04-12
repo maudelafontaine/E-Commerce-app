@@ -56,30 +56,29 @@ const getProduct = async (req, res) => {
 const getProductsInList = async (req, res) => {
   const client = new MongoClient(MONGO_URI, options);
   let { ids } = req.body;
-  ids = ids.map(id => parseInt(id));
+  ids = ids.map((id) => parseInt(id));
 
-  try{
+  try {
     await client.connect();
     const db = client.db("Commerce");
-    const items = await db.collection('items').find({"_id" : {"$in": ids}}).toArray();
+    const items = await db
+      .collection("items")
+      .find({ _id: { $in: ids } })
+      .toArray();
     res.status(200).json({
       status: 200,
       message: "Success",
       ids,
       data: items,
     });
-  }
-
-  catch(err){
+  } catch (err) {
     console.log(err);
     res.status(500).json({
       status: 500,
       message: "The server couldn't get the information!",
       data: { _id },
     });
-  }
-
-  finally{
+  } finally {
     client.close();
   }
 };
@@ -89,50 +88,43 @@ const purchaseProducts = async (req, res) => {
   // we are expecting an array that looks like [{id1, count1}, {id2, count2},...]
   const { items } = req.body;
   let error = false;
-  for(let i = 0; i < items.length; i++){
-    if(error) return;
+  for (let i = 0; i < items.length; i++) {
+    if (error) return;
     const item = items[i];
-      try{
-        await client.connect();
-        const db = client.db("Commerce");
-        const {_id, count } = item;
-        const itemInDb = await db.collection('items').findOne({ _id: parseInt(_id)});
-        const numInStock = itemInDb.numInStock;
-  
-        if(numInStock === 0){
-          throw new Error(`Item ${_id} is out of stock!`);
-        }
-  
-        else if(numInStock - count < 0){
-          throw new Error(`Cannot purchase quantity ${count} of item ${_id}`);
-        }
-  
-        else{
-          const newItemData = {$set : {numInStock: (numInStock - count)}}
-          const result = await db
-            .collection("items")
-            .updateOne({ _id: parseInt(_id) }, newItemData);
-          console.log(result);
-        }
-      }
-  
-      catch(err){
-        console.log(err);
-        error = true;
-        res.status(500).json({
-          status: 500,
-          data: req.body,
-          message: "The server couldn't get the information!",
-        });
+    try {
+      await client.connect();
+      const db = client.db("Commerce");
+      const { _id, count } = item;
+      const itemInDb = await db
+        .collection("items")
+        .findOne({ _id: parseInt(_id) });
+      const numInStock = itemInDb.numInStock;
 
+      if (numInStock === 0) {
+        throw new Error(`Item ${_id} is out of stock!`);
+      } else if (numInStock - count < 0) {
+        throw new Error(`Cannot purchase quantity ${count} of item ${_id}`);
+      } else {
+        const newItemData = { $set: { numInStock: numInStock - count } };
+        const result = await db
+          .collection("items")
+          .updateOne({ _id: parseInt(_id) }, newItemData);
+        console.log(result);
       }
-  
-      finally{
-        client.close();
-      }
-    };  
-  
-  if(!error) res.status(201).json({ status: 201, data: "items purchased" });
+    } catch (err) {
+      console.log(err);
+      error = true;
+      res.status(500).json({
+        status: 500,
+        data: req.body,
+        message: "The server couldn't get the information!",
+      });
+    } finally {
+      client.close();
+    }
+  }
+
+  if (!error) res.status(201).json({ status: 201, data: "items purchased" });
 };
 
 //        .PATCH/ decrement the number of the items
@@ -166,7 +158,6 @@ const updateProductCount = async (req, res) => {
 };
 //  .GET the category of the item by ID
 const getCategoryById = async (req, res) => {
-
   const client = new MongoClient(MONGO_URI, options);
   const _id = req.params._id;
   try {
@@ -183,14 +174,36 @@ const getCategoryById = async (req, res) => {
 };
 // .GET the items by the category
 const getProductsByCategories = async (req, res) => {
-
   const client = new MongoClient(MONGO_URI, options);
-  const { category } = req.body;
+  console.log(req.query);
+  const { category, page } = req.query;
   try {
     await client.connect();
     const db = client.db("Commerce");
-    const items = await db.collection("items").find({ category }).toArray();
+    const items = await db
+      .collection("items")
+      .find({ category })
+      .limit(24)
+      .skip(parseInt(page) * 24)
+      .toArray();
     res.status(200).json({ status: 200, data: items });
+  } catch (err) {
+    res.status(500).json({
+      status: 500,
+      message: "The server couldn't get the information!",
+    });
+  }
+  client.close();
+};
+const getProductsPagesByCategories = async (req, res) => {
+  const client = new MongoClient(MONGO_URI, options);
+  const { category } = req.query;
+  const query = { category };
+  try {
+    await client.connect();
+    const db = client.db("Commerce");
+    const items = await db.collection("items").countDocuments(query);
+    res.status(200).json({ status: 200, data: Math.ceil(items / 24) });
   } catch (err) {
     res.status(500).json({
       status: 500,
@@ -208,4 +221,5 @@ module.exports = {
   getProductsByCategories,
   getProductsInList,
   purchaseProducts,
+  getProductsPagesByCategories,
 };

@@ -4,39 +4,58 @@ import { useEffect, useState } from "react";
 import styled from "styled-components";
 import { NavLink, useParams } from "react-router-dom";
 import { ROUTE_CATEGORY_MAP } from "./CategoryMapping";
-
+import Pagination from "../Pagination";
 
 const Category = () => {
   // tracks the state of the service call to get all items in a category
-  const [itemDataStatus, setItemDataStatus] = useState('waiting');
+  const [itemDataStatus, setItemDataStatus] = useState("waiting");
+  const [page, setPage] = useState(0);
   // tracks all the items in this category
   const [item, setItem] = useState([]);
   // what kind of items are we searching for?
-  const {category} = useParams();
+  const { category } = useParams();
   const categoryTransformed = ROUTE_CATEGORY_MAP[category];
   const payload = { category: categoryTransformed };
-  
-  
+
   useEffect(() => {
     setItemDataStatus("loading");
     const fetchingData = async () => {
-      const data = await fetch("/product/category", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(payload),
-      });
+      const data = await fetch(
+        `/product/category?category=${categoryTransformed}&page=${page}`,
+        {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(payload),
+        }
+      );
       const json = await data.json();
       setItemDataStatus("idle");
       setItem(json);
     };
     fetchingData().catch(console.error);
-  }, [category]);
+  }, [category, page]);
 
-  const arrayData = item.data;
+  let arrayData = item.data;
 
-  if (itemDataStatus === 'loading') {
+  // const hello = arrayData.slice(0, 25);
+  console.log(arrayData);
+
+  // if (!arrayData === null && arrayData.length > 25) {
+  //   arrayData = arrayData.slice(0, 25);
+  // }
+
+  if (itemDataStatus === "loading") {
     return <div>Loading...</div>;
   }
+  // let myButtons = [];
+  // if (!arrayData === null) {
+  //   for (let index = 0; index < arrayData.length; index++) {
+  //     if (index % 24 === 0) {
+  //       myButtons.push(index / 24+1);
+  //     }
+  //   }
+  // }
+  // console.log(myButtons);
 
   return (
     <>
@@ -60,6 +79,7 @@ const Category = () => {
             </Item>
           ))}
       </ListContainer>
+      <Pagination page={page} setPage={setPage} />
     </>
   );
 };

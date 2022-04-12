@@ -11,12 +11,12 @@ export default createGlobalStyle`
     --font-body: 'Kosugi', Arial, Helvetica, sans-serif;
     --padding-page: 24px;
   }
-
+  
   /* http://meyerweb.com/eric/tools/css/reset/
-      v2.0 | 20110126
-      License: none (public domain)
+  v2.0 | 20110126
+  License: none (public domain)
   */
-
+  
   html, body, div, span, applet, object, iframe,
   h1, h2, h3, h4, h5, h6, p, blockquote, pre,
   a, abbr, acronym, address, big, cite, code,
@@ -30,61 +30,65 @@ export default createGlobalStyle`
   figure, figcaption, footer, header, hgroup,
   menu, nav, output, ruby, section, summary,
   time, mark, audio, video {
-      margin: 0;
-      padding: 0;
+    margin: 0;
+    padding: 0;
       border: 0;
       box-sizing: border-box;
       /* font-size: 100%; */
       vertical-align: baseline;
       list-style-type: none;
       font-size: 20px ;
-  }
-  /* HTML5 display-role reset for older browsers */
-  article, aside, details, figcaption, figure,
-  footer, header, hgroup, menu, nav, section {
+    }
+    /* HTML5 display-role reset for older browsers */
+    article, aside, details, figcaption, figure,
+    footer, header, hgroup, menu, nav, section {
       display: block;
-  }
-  body {
+    }
+    body {
       line-height: 1;
-  }
-
-  blockquote, q {
+    }
+    
+    blockquote, q {
       quotes: none;
-  }
-  blockquote:before, blockquote:after,
-  q:before, q:after {
+    }
+    blockquote:before, blockquote:after,
+    q:before, q:after {
       content: '';
       content: none;
-  }
-
-  h1,
-h2,
-h3,
-label,
-button {
-  color: #fff;
-  font-family: var(--font-heading);
-  font-size: 20px;
-  text-align: center;
-}
-p,
-a,
-li,
-blockquote,
-input {
-  font-family: var(--font-body);
-  font-size: 18px ;
-  margin: 4px;
-}
-
-
-  input {
-    font-size: 24px;
-    height: 36px;
-    /* border: 2px solid var(--color-orange); */
-    border-radius: 2px;
-    padding: 0 12px;
-  }
-
-
-`;
+    }
+    
+    h1,
+    h2,
+    h3,
+    label,
+    button {
+      color: #fff;
+      font-family: var(--font-heading);
+      font-size: 20px;
+      text-align: center;
+    }
+    p,
+    a,
+    li,
+    blockquote,
+    input {
+      font-family: var(--font-body);
+      font-size: 18px ;
+      margin: 4px;
+    }
+    
+    
+    input {
+      font-size: 24px;
+      height: 36px;
+      /* border: 2px solid var(--color-orange); */
+      border-radius: 2px;
+      padding: 0 12px;
+    }
+    @media screen and (max-width: 600px) {
+    flex: 100%;
+    max-width: 100%;}
+        
+    }
+    
+    `;

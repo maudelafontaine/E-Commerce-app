@@ -1,15 +1,19 @@
 import React from "react";
 import styled from "styled-components";
 
-const Pagination = () => {
+const Pagination = ({ page, setPage }) => {
+  const pageOnClick = (event) => {
+    setPage(parseInt(event.target.innerText) - 1);
+    console.log(event.target.innerText, "event");
+  };
   return (
     <Container>
       <Page>&lt;</Page>
-      <Page>1</Page>
-      <Page>2</Page>
-      <Page>3</Page>
-      <Page>4</Page>
-      <Page>5</Page>
+      <Page onClick={pageOnClick}>1</Page>
+      <Page onClick={pageOnClick}>2</Page>
+      <Page onClick={pageOnClick}>3</Page>
+      <Page onClick={pageOnClick}>4</Page>
+      <Page onClick={pageOnClick}>5</Page>
       <Page>&gt;</Page>
     </Container>
   );
