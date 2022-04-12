@@ -6,6 +6,6 @@ export const ROUTE_CATEGORY_MAP = {
     'lifestyle': 'Lifestyle',
     'medical': 'Medical',
     'industrial': 'Industrial',
-    'pets': 'Pets',
+    'pets': 'Pets and Animals',
     'gaming': 'Gaming'
 }
