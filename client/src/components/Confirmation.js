@@ -7,11 +7,11 @@ import { NavLink } from "react-router-dom";
 const Confirmation = () => {
   return (
     <Container>
-      <Logo>Random.co</Logo>
-      <ConfirmationMessage>THANK YOU FOR YOUR ORDER</ConfirmationMessage>
+      <Logo>RandomCo</Logo>
+      <ConfirmationMessage>THANK YOU FOR YOUR ORDER!</ConfirmationMessage>
       <Text>
         You'll be receiving a confirmation email with order details. We'll
-        notify you when order has shipped.
+        notify you when your order has been shipped.
       </Text>
       <NavigationLink to="/">CONTINUE SHOPPING</NavigationLink>
     </Container>
@@ -22,12 +22,36 @@ export default Confirmation;
 
 // Styles
 
-const Container = styled.div``;
+const Container = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 700px;
+  background-color: #adebeb;
+`;
 
-const Logo = styled.h1``;
+const Logo = styled.h1`
+  font-size: 34px;
+  color: black;
+  padding: 10px;
+`;
 
-const ConfirmationMessage = styled.h2``;
+const ConfirmationMessage = styled.h2`
+  color: black;
+  margin-top: 20px;
+  padding: 10px;
+`;
 
-const Text = styled.h2``;
+const Text = styled.h2`
+  color: black;
+  padding: 8px;
+`;
 
-const NavigationLink = styled(NavLink)``;
+const NavigationLink = styled(NavLink)`
+  color: black;
+  text-decoration: none;
+  padding: 20px;
+  background-color: white;
+  margin-top: 60px;
+`;

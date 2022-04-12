@@ -6,7 +6,6 @@ import { NavLink } from "react-router-dom";
 import { BiSearch } from "react-icons/bi";
 import { AiOutlineShoppingCart } from "react-icons/ai";
 import { AiFillHeart } from "react-icons/ai";
-// import { MdWatch } from "react-icons/md";
 
 const Header = () => {
   const logoStyle = {
@@ -14,10 +13,7 @@ const Header = () => {
     marginLeft: "10px",
     marginRight: "20px",
     textDecoration: "none",
-    // color: " #003399",
-    // color: "#fff2e6",
-    color: "white",
-    // color: "#003399",
+    color: "black",
     fontWeight: "bold",
     fontFamily: "'Roboto', sans-serif",
   };
@@ -26,10 +22,9 @@ const Header = () => {
     <Container>
       <NavigationLink to="/" style={logoStyle}>
         RandomCo
-        {/* <MdWatch size={"32px"} /> */}
       </NavigationLink>
       <SearchContainer>
-        <Search></Search>
+        <Search placeholder="Search"></Search>
         <SearchBtn>
           <BiSearch
             size={"30px"}
@@ -53,14 +48,11 @@ const Header = () => {
       </Dropdown>
       <NavigationLink to="/login">Login</NavigationLink>
       <NavigationLink to="/wishlist">
-        <AiFillHeart size={"30px"} style={{ marginTop: "-40px" }} />
+        <AiFillHeart size={"30px"} />
       </NavigationLink>
-      {/* <NavigationLink>
-          <AiOutlineShoppingCart size={"26px"} style={{ marginLeft: "20px" }} />
-        </NavigationLink> */}
-      <CartBtn>
-        <AiOutlineShoppingCart size={"30px"} />
-      </CartBtn>
+      <NavigationLink to="/cart">
+        <AiOutlineShoppingCart size={"26px"} style={{ color: "black" }} />
+      </NavigationLink>
     </Container>
   );
 };
@@ -86,6 +78,7 @@ const Search = styled.input`
   border-color: white;
   margin-right: 20px;
   margin-left: 50px;
+  font-size: 14px;
 `;
 
 const SearchBtn = styled.button`
@@ -95,7 +88,6 @@ const SearchBtn = styled.button`
 `;
 
 // Dropdown menu for categories
-
 const DropdownContent = styled.div`
   display: none;
   position: absolute;
@@ -129,30 +121,23 @@ const Link = styled(NavLink)`
 
   &:hover {
     cursor: pointer;
-    /* text-decoration-color: #ebf0fa; */
-    color: #ccd9ff;
+    color: #adebeb;
   }
 `;
 
 const Dropdown = styled.div`
   position: relative;
   display: inline-block;
-  /* background-color: #4775d1; */
-  /* background-color: yellow; */
   font-family: var(--font-body);
   font-size: 18px;
   margin-right: 16px;
 
   &:hover ${DropdownContent} {
     display: block;
-    /* background-color: #ccd9ff; mauve */
     background-color: white;
-    color: #ebf0fa;
   }
 
   &:hover ${DropdownBtn} {
-    /* background-color: #4775d1; */
-    /* color: #ebf0fa; */
     color: white;
   }
 `;
@@ -174,12 +159,6 @@ const NavigationLink = styled(NavLink)`
     /* color: #ebf0fa; */
     border-bottom: 3px solid black;
   }
-`;
-
-// replace it with the uncommented navlink for cart when you have Cart.js
-const CartBtn = styled.button`
-  all: unset;
-  cursor: pointer;
 `;
 
 // Notes :

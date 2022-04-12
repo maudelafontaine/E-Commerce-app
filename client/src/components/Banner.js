@@ -27,11 +27,7 @@ const Container = styled.div`
   justify-content: center;
   align-items: center;
   color: white;
-  /* background-color: #ccd9ff; */
   background-color: #ffe6e6;
-  /* background-color: #f2f2f2; */
-  // #f2f2f2;
-  /* background-color: #4775d1; */
   height: 5vh;
 `;
 

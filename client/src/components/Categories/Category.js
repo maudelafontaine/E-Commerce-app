@@ -5,6 +5,7 @@ import styled from "styled-components";
 import { NavLink, useParams } from "react-router-dom";
 import { ROUTE_CATEGORY_MAP } from "./CategoryMapping";
 import Pagination from "../Pagination";
+import Loader from "../Loader";
 
 const Category = () => {
   // tracks the state of the service call to get all items in a category
@@ -36,27 +37,9 @@ const Category = () => {
   }, [category, page]);
 
   let arrayData = item.data;
-
-  // const hello = arrayData.slice(0, 25);
-  console.log(arrayData);
-
-  // if (!arrayData === null && arrayData.length > 25) {
-  //   arrayData = arrayData.slice(0, 25);
-  // }
-
   if (itemDataStatus === "loading") {
-    return <div>Loading...</div>;
+    return <Loader />;
   }
-  // let myButtons = [];
-  // if (!arrayData === null) {
-  //   for (let index = 0; index < arrayData.length; index++) {
-  //     if (index % 24 === 0) {
-  //       myButtons.push(index / 24+1);
-  //     }
-  //   }
-  // }
-  // console.log(myButtons);
-
   return (
     <>
       <Banner>
@@ -69,7 +52,7 @@ const Category = () => {
         {arrayData &&
           arrayData.map((e) => (
             <Item key={e._id}>
-              <NavigationLink to={`/details/${e._id}`}>
+              <NavigationLink to={`/item/${e._id}`}>
                 <ItemContainer>
                   <Picture src={e.imageSrc} alt={e.id} />
                   <Name>{e.name}</Name>
@@ -102,7 +85,8 @@ const Banner = styled.div`
 const Text = styled.h2`
   font-size: 35px;
   color: black;
-  border-bottom: 6px solid #003399;
+  padding-bottom: 4px;
+  border-bottom: 6px solid #adebeb;
 `;
 
 const Dropdown = styled.div`
@@ -148,11 +132,11 @@ const Picture = styled.img`
   border-radius: 2px;
   margin-bottom: 20px;
   align-self: center;
-  border-left: 5px solid red;
+  /* border-left: 5px solid red;
   border-bottom: 5px solid red;
-  border: 3px solid black;
   /* width: 180px;
   height: 200px; */
+  border: 3px solid #ffe6e6;
 
   &:hover {
     transform: scale(1.2);

@@ -55,40 +55,46 @@ export default createGlobalStyle`
     q:before, q:after {
       content: '';
       content: none;
-    }
-    
-    h1,
-    h2,
-    h3,
-    label,
-    button {
-      color: #fff;
-      font-family: var(--font-heading);
-      font-size: 20px;
-      text-align: center;
-    }
-    p,
-    a,
-    li,
-    blockquote,
-    input {
-      font-family: var(--font-body);
-      font-size: 18px ;
-      margin: 4px;
-    }
-    
-    
-    input {
-      font-size: 24px;
-      height: 36px;
-      /* border: 2px solid var(--color-orange); */
-      border-radius: 2px;
-      padding: 0 12px;
-    }
-    @media screen and (max-width: 600px) {
+  }
+
+  h1,
+h2,
+h3,
+label,
+button {
+  color: #fff;
+  font-family: "Roboto", sans-serif;
+  font-size: 20px;
+  text-align: center;
+}
+p,
+a,
+li,
+blockquote,
+input {
+  font-family: "Roboto", sans-serif;
+  font-size: 18px ;
+  margin: 4px;
+}
+
+
+  input {
+    font-size: 24px;
+    height: 36px;
+    /* border: 2px solid var(--color-orange); */
+    border-radius: 2px;
+    padding: 0 12px;
+  }
+  @media screen and (max-width: 600px) {
     flex: 100%;
     max-width: 100%;}
         
     }
-    
-    `;
+
+`;
+
+// font-family: "Roboto", sans-serif;
+
+// To make use of the var in style-components :
+// color: var(--color-cadmium-red);
+// font-family: var(--font-body);

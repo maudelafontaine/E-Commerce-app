@@ -16,16 +16,17 @@ const Container = styled.div`
   flex-direction: row;
   justify-content: center;
   align-items: center;
+  height: 700px;
 `;
 
 const Spinner = styled.div`
-  margin-top: 200px;
+  /* margin-top: 200px; */
   border: 16px solid #f3f3f3;
   border-radius: 50%;
   border-top: 16px solid #ff9999;
-  border-bottom: 16px solid #ff9999;
-  border-left: 16px solid white;
-  border-right: 16px solid white;
+  border-bottom: 16px solid #adebeb;
+  border-left: 16px solid #ffe6e6;
+  border-right: 16px solid #ffe6e6;
   width: 80px;
   height: 80px;
   -webkit-animation: spin 2s linear infinite; /* Safari */
