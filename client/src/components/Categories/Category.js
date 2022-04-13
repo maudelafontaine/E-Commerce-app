@@ -14,6 +14,8 @@ const Category = () => {
   // tracks all the items in this category
   const [item, setItem] = useState([]);
   // what kind of items are we searching for?
+  //create a state for Total of pages
+  const [totalPages, setTotalPages] = useState(0);
   const { category } = useParams();
   const categoryTransformed = ROUTE_CATEGORY_MAP[category];
   const payload = { category: categoryTransformed };
@@ -30,10 +32,18 @@ const Category = () => {
         }
       );
       const json = await data.json();
-      setItemDataStatus("idle");
       setItem(json);
     };
+    const fetchingPage = async () => {
+      const pages = await fetch(
+        `/product/category/pages?category=${categoryTransformed}`
+      );
+      const jsonPages = await pages.json();
+      setTotalPages(jsonPages.data);
+    };
     fetchingData().catch(console.error);
+    fetchingPage().catch(console.error);
+    setItemDataStatus("idle");
   }, [category, page]);
 
   let arrayData = item.data;
@@ -62,7 +72,7 @@ const Category = () => {
             </Item>
           ))}
       </ListContainer>
-      <Pagination page={page} setPage={setPage} />
+      <Pagination page={page} setPage={setPage} categoryPages={totalPages} />
     </>
   );
 };
