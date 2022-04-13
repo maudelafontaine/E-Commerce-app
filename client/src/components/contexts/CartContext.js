@@ -36,183 +36,176 @@ const initialState = {
 };
 
 const reducer = (state, action) => {
-    
-    // action is of the form {type, data}
-    // data is of the form {id, count, price}
-    switch (action.type){
-        
-        // The user would like to change the number of a particular item in the cart
-        case 'set-item-number':{
-            const item = action.data;
-            let newItems = clone(state.currentItems);
+  // action is of the form {type, data}
+  // data is of the form {id, count, price}
+  switch (action.type) {
+    // The user would like to change the number of a particular item in the cart
+    case "set-item-number": {
+      const item = action.data;
+      let newItems = clone(state.currentItems);
 
-            if(newItems.hasOwnProperty(item.id) && item.count > 0){
-                newItems[item.id].numInCart = item.count;
-            }
+      if (newItems.hasOwnProperty(item.id) && item.count > 0) {
+        newItems[item.id].numInCart = item.count;
+      } else if (newItems.hasOwnProperty(item.id) && item.count === 0) {
+        // Setting the item to 0 should remove it from the cart entirely
+        delete newItems[item.id];
+      } else if (!newItems.hasOwnProperty(item.id)) {
+        // This case handles the creation of a new item in the cart.
+        newItems[item.id] = { numInCart: item.count, price: item.price };
+      }
 
-            else if(newItems.hasOwnProperty(item.id) && item.count === 0){
-                // Setting the item to 0 should remove it from the cart entirely
-                delete newItems[item.id];
-            }
-
-
-            else if(!newItems.hasOwnProperty(item.id)){
-                // This case handles the creation of a new item in the cart.
-                newItems[item.id] = {count: item.count, price: item.price };
-            }
-
-            return {
-                ...state,
-                currentItems: newItems,
-            }
-        }
-
-        // The user would like to add an item to the cart
-        case 'add-item':{
-            const item = action.data;
-            let newItems = clone(state.currentItems);
-            if(newItems.hasOwnProperty(item.id)){
-                // We already have this item in the cart, so just need to update the count
-                newItems[item.id].numInCart += item.count;
-            }
-
-            else{
-                // We do not already have this item in the cart, so we need to add a new key
-                // entirely
-                // debugger;
-                newItems[item.id] = {numInCart: item.count, price: item.price};
-            }
-
-            return {
-                ...state,
-                currentItems: newItems,
-            };
-        }
-        
-        // The user would like to remove a single instance of an item from the cart
-        case 'remove-item':{
-            // debugger;
-            const item = action.data;
-            let newItems = clone(state.currentItems);
-            // We have more than one instance in the card, so we just need to remove one
-            if(newItems.hasOwnProperty(item.id) && newItems[item.id].numInCart > 1){
-                newItems[item.id].numInCart --;
-            }
-
-            // We do not allow the cart to have 0 of an item in it, so in this case
-            // we if we remove the item from the cart we remove reference to it altogether
-            else if(newItems.hasOwnProperty(item.id) && newItems[item.id].numInCart === 1){
-                delete newItems[item.id];
-            }
-
-            // An else here would cover the case that the item is already not in the cart. 
-            // In this case there is nothing to remove, so do nothing IE no need for a separate case
-
-            return {
-                ...state,
-                currentItems: newItems,
-            }
-        }
-
-        // The user would like to remove all instances of an item from the cart
-        case 'delete-item':{
-            const item = action.data;
-            let newItems = clone(state.currentItems);
-            if(newItems.hasOwnProperty(item.id)) delete newItems[item.id];
-        
-            return {
-                ...state,
-                currentItems: newItems,
-            }
-        }
-        
-        // TODO: Implement this case once services are ready
-        // case 'confirm-purchase':
-        //     return {
-
-        //     }
-        
-        default:
-            throw new Error(`Action type ${action.type} is not recognized!`)
+      return {
+        ...state,
+        currentItems: newItems,
+      };
     }
 
+    // The user would like to add an item to the cart
+    case "add-item": {
+      const item = action.data;
+      let newItems = clone(state.currentItems);
+      if (newItems.hasOwnProperty(item.id)) {
+        // We already have this item in the cart, so just need to update the count
+        newItems[item.id].numInCart += item.count;
+      } else {
+        // We do not already have this item in the cart, so we need to add a new key
+        // entirely
+        // debugger;
+        newItems[item.id] = { numInCart: item.count, price: item.price };
+      }
+
+      return {
+        ...state,
+        currentItems: newItems,
+      };
+    }
+
+    // The user would like to remove a single instance of an item from the cart
+    case "remove-item": {
+      // debugger;
+      const item = action.data;
+      let newItems = clone(state.currentItems);
+      // We have more than one instance in the card, so we just need to remove one
+      if (newItems.hasOwnProperty(item.id) && newItems[item.id].numInCart > 1) {
+        newItems[item.id].numInCart--;
+      }
+
+      // We do not allow the cart to have 0 of an item in it, so in this case
+      // we if we remove the item from the cart we remove reference to it altogether
+      else if (
+        newItems.hasOwnProperty(item.id) &&
+        newItems[item.id].numInCart === 1
+      ) {
+        delete newItems[item.id];
+      }
+
+      // An else here would cover the case that the item is already not in the cart.
+      // In this case there is nothing to remove, so do nothing IE no need for a separate case
+
+      return {
+        ...state,
+        currentItems: newItems,
+      };
+    }
+
+    // The user would like to remove all instances of an item from the cart
+    case "delete-item": {
+      const item = action.data;
+      let newItems = clone(state.currentItems);
+      if (newItems.hasOwnProperty(item.id)) delete newItems[item.id];
+
+      return {
+        ...state,
+        currentItems: newItems,
+      };
+    }
+
+    // TODO: Implement this case once services are ready
+    // case 'confirm-purchase':
+    //     return {
+
+    //     }
+
+    default:
+      throw new Error(`Action type ${action.type} is not recognized!`);
+  }
 };
 
 export const CartProvider = ({ children }) => {
-    const [state, dispatch] = React.useReducer(reducer, initialState);
-    // functions which take action on the contents of the cart
-    
-    const setItemNumber = (data) => {
-        dispatch({
-            type:'set-item-number',
-            data
-        });
-    }
+  const [state, dispatch] = React.useReducer(reducer, initialState);
+  // functions which take action on the contents of the cart
 
-    const addItem = (data) => {
+  const setItemNumber = (data) => {
+    dispatch({
+      type: "set-item-number",
+      data,
+    });
+  };
 
-        dispatch({
-            type:'add-item',
-            data,
-        });
-    };
-    
-    const removeItem = (data) => {
-        dispatch({
-            type:'remove-item',
-            data,
-        });
-    };
+  const addItem = (data) => {
+    dispatch({
+      type: "add-item",
+      data,
+    });
+  };
 
-    const deleteItem = (data) => {
-        dispatch({
-            type:'delete-item',
-            data,
-        });
-    };
+  const removeItem = (data) => {
+    dispatch({
+      type: "remove-item",
+      data,
+    });
+  };
 
-    const getTotal = () => {
-        // Returns the total cost of the items in the cart
-        const total =  Object.keys(state.currentItems).reduce(
-            (previousValue, currentValue) => {
-                // previousValue is the total cost so far
-                // currentValue is the key of the current item in the cart
+  const deleteItem = (data) => {
+    dispatch({
+      type: "delete-item",
+      data,
+    });
+  };
 
-                const currentItem = state.currentItems[currentValue];
-                return previousValue + (currentItem.numInCart *  currentItem.price);
-            }, 0
-        );
-        return total;
-    };
-    
-    // return an array of ids of items in the cart
-    const getIds = () => Object.keys(state.currentItems)
+  const getTotal = () => {
+    // Returns the total cost of the items in the cart
+    const total = Object.keys(state.currentItems).reduce(
+      (previousValue, currentValue) => {
+        // previousValue is the total cost so far
+        // currentValue is the key of the current item in the cart
 
-    // TODO: implement this once the services are ready
-    // const purchaseItemsInCart = () => {
-    //     dispatch({
-    //         type:'confirm-purchase',
-    //     });
-    // }
+        const currentItem = state.currentItems[currentValue];
+        return previousValue + currentItem.numInCart * currentItem.price;
+      },
+      0
+    );
+    return total;
+  };
 
-    return(
-        <CartContext.Provider
-            value={{
-                ...state,
-                actions:{
-                    setItemNumber,
-                    addItem,
-                    removeItem,
-                    deleteItem,
-                    // purchaseItemsInCart
-                    getTotal,
-                    getIds,
-                }
-            }}
-        >
-            { children }
-        </CartContext.Provider>
-    )
-}
+  // return an array of ids of items in the cart
+  const getIds = () => Object.keys(state.currentItems);
+
+  // TODO: implement this once the services are ready
+  // const purchaseItemsInCart = () => {
+  //     dispatch({
+  //         type:'confirm-purchase',
+  //     });
+  // }
+
+  return (
+    <CartContext.Provider
+      value={{
+        ...state,
+        actions: {
+          setItemNumber,
+          addItem,
+          removeItem,
+          deleteItem,
+          // purchaseItemsInCart
+          getTotal,
+          getIds,
+        },
+      }}
+    >
+      {children}
+    </CartContext.Provider>
+  );
+};
 
 export default CartContext;

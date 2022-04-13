@@ -1,10 +1,12 @@
 // Item details component : when user clicks on an item, it gets redirected to a detailed page of the item
 
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useContext, useRef } from "react";
 import styled from "styled-components";
 import { useParams } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { AiFillHeart } from "react-icons/ai";
 import Loader from "./Loader";
+import CartContext from "./contexts/CartContext";
 
 const ItemDetails = () => {
   // get product by id : "/product/:_id"
@@ -12,14 +14,16 @@ const ItemDetails = () => {
   const [item, setItem] = useState("");
   const [qty, setQty] = useState(0);
 
-  // const [increment, setIncrement] = useState("");
-  // const [decrement, setDecrement] = useState("");
+  let navigate = useNavigate();
+
+  const {
+    actions: { setItemNumber },
+  } = useContext(CartContext);
 
   useEffect(() => {
     const findItem = async () => {
       const res = await fetch(`/product/${_id}`);
       const data = await res.json();
-      console.log(data.data);
       setItem(data.data);
     };
     findItem();
@@ -29,7 +33,7 @@ const ItemDetails = () => {
     return <Loader />;
   }
   const handleChange = (e) => {
-    console.log(e.target.value);
+    console.log("changed");
   };
 
   const handleIncrement = () => {
@@ -38,6 +42,15 @@ const ItemDetails = () => {
 
   const handleDecrement = () => {
     setQty(qty - 1);
+  };
+
+  const handlePurchase = () => {
+    // need useRef
+    // const refItem = useRef(setItemNumber);
+    const price = parseFloat(item.price.replace("$", ""));
+    setItemNumber({ id: _id, price: price, count: qty });
+    navigate("/cart");
+    console.log(qty);
   };
 
   return (
@@ -51,13 +64,9 @@ const ItemDetails = () => {
 
         <AddToCartContainer>
           <Increment onClick={handleIncrement}>&#43;</Increment>
-          <Quantity
-            value={qty}
-            placeholder="1"
-            onChange={handleChange}
-          ></Quantity>
+          <Quantity value={qty} onChange={handleChange}></Quantity>
           <Decrement onClick={handleDecrement}>&#45;</Decrement>
-          <AddToCartBtn>ADD TO CART</AddToCartBtn>
+          <AddToCartBtn onClick={handlePurchase}>ADD TO CART</AddToCartBtn>
           <AddToWishList>
             <AiFillHeart />
           </AddToWishList>
@@ -129,6 +138,10 @@ const Increment = styled.button`
   padding-right: 10px;
   width: 30px;
   margin-right: 5px;
+
+  &:hover {
+    cursor: pointer;
+  }
 `;
 
 const Decrement = styled.button`
@@ -140,6 +153,10 @@ const Decrement = styled.button`
   width: 30px;
   margin-left: 5px;
   margin-right: 20px;
+
+  &:hover {
+    cursor: pointer;
+  }
 `;
 
 const Quantity = styled.input`

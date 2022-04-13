@@ -80,7 +80,9 @@ export default Footer;
 
 // Footer container
 const Container = styled.div`
-  background-color: #ff9999;
+  /* background-color: #ff9999; */
+  /* background-color: #ffaa00; */
+  background-color: #993366;
   display: flex;
   flex-direction: row;
   justify-content: space-around;
