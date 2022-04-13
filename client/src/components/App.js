@@ -10,6 +10,7 @@ import AboutUs from "./AboutUs";
 import ItemDetails from "./ItemDetails";
 import TestCart from "./Cart/TestCart";
 import Confirmation from "./Confirmation";
+import Cart from "./Cart/Cart";
 
 // import Cart from "./Cart";
 
@@ -40,7 +41,7 @@ const App = () => {
             <Route path="/category/:category" element={<Category />} />
             {/* <Route path="/category/lifestyle/:_id" element={<ItemDetails />} /> */}
             <Route path="/item/:_id" element={<ItemDetails />} />
-            <Route path="/cart" element={<TestCart />} />
+            <Route path="/cart" element={<Cart />} />
             <Route path="/confirmation" element={<Confirmation />} />
             <Route path="/wishlist" element={<Wishlist />} />
             <Route path="/login" element={<Login />} />

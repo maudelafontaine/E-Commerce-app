@@ -49,7 +49,7 @@ const Container = styled.div`
   align-items: center;
   background-color: #f5f5f5;
   /* background-color: #adebeb; */
-  height: 700px;
+  height: 800px;
 `;
 
 const PromotionContainer = styled.div`

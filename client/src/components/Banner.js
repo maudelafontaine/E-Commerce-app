@@ -9,8 +9,7 @@ const Banner = () => {
   return (
     <Container>
       <Message>
-        Free shipping and returns on orders over $100{" "}
-        <FaCanadianMapleLeaf size={"15px"} />
+        Free shipping on orders over $100 <FaCanadianMapleLeaf size={"15px"} />
       </Message>
     </Container>
   );
