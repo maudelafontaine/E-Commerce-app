@@ -1,7 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 
-const Pagination = ({ page, setPage }) => {
+const Pagination = ({ page, setPage, categoryPages }) => {
   const pageOnClick = (event) => {
     setPage(parseInt(event.target.innerText) - 1);
     console.log(event.target.innerText, "event");
@@ -9,11 +9,9 @@ const Pagination = ({ page, setPage }) => {
   return (
     <Container>
       <Page>&lt;</Page>
-      <Page onClick={pageOnClick}>1</Page>
-      <Page onClick={pageOnClick}>2</Page>
-      <Page onClick={pageOnClick}>3</Page>
-      <Page onClick={pageOnClick}>4</Page>
-      <Page onClick={pageOnClick}>5</Page>
+      {[...Array(categoryPages).keys()].map((e) => {
+        return <Page onClick={pageOnClick}>{e + 1}</Page>;
+      })}
       <Page>&gt;</Page>
     </Container>
   );
