@@ -9,7 +9,6 @@ import Loader from "./Loader";
 import CartContext from "./contexts/CartContext";
 
 const ItemDetails = () => {
-  // get product by id : "/product/:_id"
   const { _id } = useParams();
   const [item, setItem] = useState("");
   const [qty, setQty] = useState(0);
@@ -20,6 +19,7 @@ const ItemDetails = () => {
     actions: { setItemNumber },
   } = useContext(CartContext);
 
+  // Get the item by id
   useEffect(() => {
     const findItem = async () => {
       const res = await fetch(`/product/${_id}`);
@@ -32,25 +32,27 @@ const ItemDetails = () => {
   if (!item) {
     return <Loader />;
   }
+
+  //
   const handleChange = (e) => {
-    console.log("changed");
+    console.log(e.target.value);
   };
 
+  // Increase quantity by 1
   const handleIncrement = () => {
     setQty(qty + 1);
   };
 
+  // Decrease quantity by 2
   const handleDecrement = () => {
     setQty(qty - 1);
   };
 
+  // Add the item(s) to the cart
   const handlePurchase = () => {
-    // need useRef
-    // const refItem = useRef(setItemNumber);
     const price = parseFloat(item.price.replace("$", ""));
     setItemNumber({ id: _id, price: price, count: qty });
     navigate("/cart");
-    console.log(qty);
   };
 
   return (
@@ -61,7 +63,6 @@ const ItemDetails = () => {
       <DetailsContainer>
         <Name>{item.name}</Name>
         <Price>{item.price}</Price>
-
         <AddToCartContainer>
           <Increment onClick={handleIncrement}>&#43;</Increment>
           <Quantity value={qty} onChange={handleChange}></Quantity>
@@ -78,13 +79,13 @@ const ItemDetails = () => {
 
 export default ItemDetails;
 
+// Styles :
+
 const Container = styled.div`
   display: flex;
   flex-direction: row;
   justify-content: space-evenly;
   height: 700px;
-  /* background-color: pink; */
-  /* border: 4px solid black; */
 `;
 
 const PictureContainer = styled.div`
@@ -92,15 +93,12 @@ const PictureContainer = styled.div`
   flex-direction: row;
   justify-content: center;
   align-items: center;
-  /* border: 3px solid black; */
   flex-basis: auto;
   width: 400px;
   background-color: white;
 `;
 
-const Picture = styled.img`
-  /* border: 4px solid black; */
-`;
+const Picture = styled.img``;
 
 const DetailsContainer = styled.div`
   display: flex;
@@ -167,10 +165,6 @@ const Quantity = styled.input`
   padding-bottom: 5px;
   border-radius: 4px;
   color: black;
-
-  /* &:hover {
-    cursor: pointer;
-  } */
 `;
 
 const AddToCartBtn = styled.button`
@@ -198,8 +192,4 @@ const AddToWishList = styled.div`
   align-items: center;
   margin-left: 20px;
   cursor: pointer;
-  /* height: 40px; */
 `;
-
-// Notes :
-// https://www.w3schools.com/howto/tryit.asp?filename=tryhow_css_loader

@@ -153,25 +153,6 @@ const NavigationLink = styled(NavLink)`
 
   &:hover {
     cursor: pointer;
-    /* text-decoration: underline;
-    text-decoration-color: #ebf0fa;
-    text-decoration-thickness: 3px; */
-    /* color: #ebf0fa; */
     border-bottom: 3px solid black;
   }
 `;
-
-// Notes :
-// https://www.w3schools.com/howto/tryit.asp?filename=tryhow_css_js_dropdown_hover
-
-// Extra code :
-{
-  /* <NavigationLink to="/category/entertainment">
-          Entertainment
-        </NavigationLink>
-        <NavigationLink to="/category/fitness">Fitness</NavigationLink>
-        <NavigationLink to="/category/gaming">Gaming</NavigationLink>
-        <NavigationLink to="/category/lifestyle">Lifestyle</NavigationLink>
-        <NavigationLink to="/category/medical">Medical</NavigationLink>
-        <NavigationLink to="/category/pets">Pets</NavigationLink> */
-}

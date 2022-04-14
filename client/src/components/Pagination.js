@@ -1,3 +1,5 @@
+// Pagination system for each category pages
+
 import React from "react";
 import styled from "styled-components";
 
@@ -24,7 +26,7 @@ const Container = styled.div`
   flex-direction: row;
   justify-content: center;
   margin-top: 60px;
-  /* background-color: white; */
+  padding-bottom: 40px;
 `;
 
 const Page = styled.button`
@@ -44,6 +46,3 @@ const Page = styled.button`
     border-color: white;
   }
 `;
-
-// Notes :
-// https://pagination.js.org/

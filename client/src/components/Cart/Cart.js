@@ -87,28 +87,27 @@ export const Cart = () => {
           <CardSideTitle>Cart</CardSideTitle>
         </CardSideWrapper>
       </CartSideCard>
-      {(cartDetailsStatus === 'waiting') && <Loader/>}
-      {(cartDetailsStatus === 'idle') &&
+      {cartDetailsStatus === "waiting" && <Loader />}
+      {cartDetailsStatus === "idle" && (
         <CartDetails>
-        {cartDetails.map((elt) => {
-          return (
-            <CartItem
-              key={elt._id}
-              id={elt._id}
-              name={elt.name}
-              price={elt.price}
-              imageSrc={elt.imageSrc}
-              count={currentItems[elt._id] && currentItems[elt._id].numInCart}
-            />
-          );
-        })}
-        <div>Seller Instructions</div>
-        <SellerInstructions rows={4} cols={50}></SellerInstructions>
-        <Total amt={getTotal()} />
-        <CheckoutButton onClick={purchaseItems}>Checkout</CheckoutButton>
-      </CartDetails>
-      }
-      
+          {cartDetails.map((elt) => {
+            return (
+              <CartItem
+                key={elt._id}
+                id={elt._id}
+                name={elt.name}
+                price={elt.price}
+                imageSrc={elt.imageSrc}
+                count={currentItems[elt._id] && currentItems[elt._id].numInCart}
+              />
+            );
+          })}
+          <div>Seller Instructions</div>
+          <SellerInstructions rows={4} cols={50}></SellerInstructions>
+          <Total amt={getTotal()} />
+          <CheckoutButton onClick={purchaseItems}>Checkout</CheckoutButton>
+        </CartDetails>
+      )}
     </CartWrapper>
   );
 };
@@ -151,7 +150,6 @@ const SellerInstructions = styled.textarea`
 `;
 
 const Total = ({ amt }) => {
-  
   return (
     <div>
       <TotalText>Total: </TotalText>
@@ -172,10 +170,17 @@ const TotalAmt = styled.span`
 const CartDetails = styled.div``;
 
 const CheckoutButton = styled.button`
-  margin-top: 10px;
-  color: black;
+  width: 200px;
+  height: 50px;
+  padding: 10px;
+  margin-top: 12px;
+  background-color: grey;
   border: none;
-  background-color: darkgray;
+  border-radius: 4px;
+
+  &:hover {
+    cursor: pointer;
+  }
 `;
 
 export default Cart;

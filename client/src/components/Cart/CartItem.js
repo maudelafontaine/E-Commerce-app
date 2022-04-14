@@ -93,6 +93,10 @@ const RemoveFromCartButton = styled.button`
   background-color: transparent;
   text-decoration: none;
   border: none;
+
+  &:hover {
+    cursor: pointer;
+  }
 `;
 
 export default CartItem;

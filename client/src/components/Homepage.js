@@ -90,7 +90,6 @@ const Message = styled.h2`
   background-color: white;
   padding: 22px;
   border-style: solid;
-  /* border-color: #003399; */
   border-width: 4px;
   font-size: 25px;
 `;
@@ -103,7 +102,6 @@ const Btn = styled.button`
   height: 60px;
   border-color: white;
   font-weight: bold;
-  /* color: #003399; */
   color: white;
   background-color: #adebeb;
   border: none;
@@ -131,11 +129,3 @@ const Text = styled.h2`
   border-radius: 2px;
   font-size: 18px;
 `;
-
-// Ideas :
-// browse by category
-
-/* <Message>
-        Get -25% on our <strong>Lifestyle</strong> collection
-      </Message>
-*/

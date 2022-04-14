@@ -80,8 +80,6 @@ export default Footer;
 
 // Footer container
 const Container = styled.div`
-  /* background-color: #ff9999; */
-  /* background-color: #ffaa00; */
   background-color: #993366;
   display: flex;
   flex-direction: row;
@@ -103,7 +101,6 @@ const Menu = styled.div`
 const NavigationLink = styled(NavLink)`
   font-family: "Roboto", sans-serif;
   font-size: 18px;
-  /* font-weight: bold; */
   color: #ebf0fa;
   text-decoration: none;
   margin: 4px;
