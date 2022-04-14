@@ -1,4 +1,4 @@
-// Lifestyle category component : list of all the products
+// Category component : list of all the products changes dynamically depending on which category is selected
 
 import { useEffect, useState } from "react";
 import styled from "styled-components";
@@ -41,16 +41,14 @@ const Category = () => {
       const jsonPages = await pages.json();
       setTotalPages(jsonPages.data);
     };
-    
+
     await fetchingData().catch(console.error);
     await fetchingPage().catch(console.error);
     setItemDataStatus("idle");
   }, [category, page]);
 
   let arrayData = item.data;
-  // if (itemDataStatus === "loading") {
-  //   return <Loader />;
-  // }
+
   return (
     <>
       <Banner>
@@ -59,15 +57,15 @@ const Category = () => {
       <Dropdown>
         <SortBy placeholder="SORT BY                          +"></SortBy>
       </Dropdown>
-      {itemDataStatus === 'loading' && 
+      {itemDataStatus === "loading" && (
         <LoaderContainer>
-          <Loader/>
+          <Loader />
         </LoaderContainer>
-        }
-      
-        {itemDataStatus === 'idle' && arrayData &&
+      )}
+
+      {itemDataStatus === "idle" && arrayData && (
         <ListContainer>
-          {arrayData.map(e => (
+          {arrayData.map((e) => (
             <Item key={e._id}>
               <NavigationLink to={`/item/${e._id}`}>
                 <ItemContainer>
@@ -76,9 +74,11 @@ const Category = () => {
                   <Price>{e.price}</Price>
                 </ItemContainer>
               </NavigationLink>
-            </Item>))}
-        </ListContainer>}
-      
+            </Item>
+          ))}
+        </ListContainer>
+      )}
+
       <Pagination page={page} setPage={setPage} categoryPages={totalPages} />
     </>
   );
@@ -96,7 +96,6 @@ const Banner = styled.div`
   justify-content: center;
   align-items: center;
   background-color: white;
-  /* margin-bottom: 50px; */
 `;
 
 const Text = styled.h2`
@@ -108,7 +107,6 @@ const Text = styled.h2`
 
 const Dropdown = styled.div`
   height: 50px;
-  /* background-color: white; */
   margin-top: 15px;
   margin-bottom: 24px;
   cursor: pointer;
@@ -124,7 +122,6 @@ const SortBy = styled.input`
 
 // List of items
 const ListContainer = styled.div`
-  /* background-color: white; */
   display: grid;
   grid-template-columns: repeat(4, 1fr);
   gap: 10px;
@@ -149,10 +146,6 @@ const Picture = styled.img`
   border-radius: 2px;
   margin-bottom: 20px;
   align-self: center;
-  /* border-left: 5px solid red;
-  border-bottom: 5px solid red;
-  /* width: 180px;
-  height: 200px; */
   border: 3px solid #ffe6e6;
 
   &:hover {
@@ -166,7 +159,6 @@ const Name = styled.h2`
   font-size: 18px;
   margin-bottom: 8px;
   margin-top: 15px;
-  /* font-weight: normal; */
 `;
 
 const Price = styled.h2`
@@ -181,7 +173,3 @@ const LoaderContainer = styled.div`
   justify-content: center;
   width: 100%;
 `;
-
-// Notes :
-// https://contactmentor.com/how-to-add-loading-spinner-react-js/
-//https://travis.media/how-to-easily-style-a-select-dropdown/

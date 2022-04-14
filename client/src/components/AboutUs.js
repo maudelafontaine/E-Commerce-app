@@ -48,8 +48,6 @@ const Picture = styled.img`
   height: 350px;
   border-radius: 25px;
   margin-top: 20px;
-  /* border-top: 6px solid blue;
-  border-bottom: 4px solid blue; */
 `;
 
 const Trio = styled.h2`

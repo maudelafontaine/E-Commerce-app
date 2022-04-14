@@ -2,14 +2,18 @@ import { createGlobalStyle } from "styled-components";
 
 export default createGlobalStyle`
   :root {
-    --color-cadmium-red:#000000;
-    --color-alabama-crimson:#ffcc99;  //header
-    --color-orange:#ff9999; //center
-    --color-selective-yellow: #ff6666; //buttons
-    --color-desert-sand:#000000 ;
-    --font-heading: 'Permanent Marker', Arial, Helvetica, sans-serif;
+
+    /* --font-heading: 'Permanent Marker', Arial, Helvetica, sans-serif;
     --font-body: 'Kosugi', Arial, Helvetica, sans-serif;
-    --padding-page: 24px;
+    --padding-page: 24px;  */
+
+    --color-pink: #ffe6e6;
+    --color-grey: #f5f5f5;
+    --color-red: #ff6666;
+    --color-turquoise:#adebeb;
+    --color--purple:#993366;
+
+    --font-body:'Roboto', sans-serif;
   }
   
   /* http://meyerweb.com/eric/tools/css/reset/
@@ -34,7 +38,6 @@ export default createGlobalStyle`
     padding: 0;
       border: 0;
       box-sizing: border-box;
-      /* font-size: 100%; */
       vertical-align: baseline;
       list-style-type: none;
       font-size: 20px ;
@@ -77,24 +80,14 @@ input {
   margin: 4px;
 }
 
-
   input {
     font-size: 24px;
     height: 36px;
-    /* border: 2px solid var(--color-orange); */
     border-radius: 2px;
     padding: 0 12px;
   }
   @media screen and (max-width: 600px) {
     flex: 100%;
-    max-width: 100%;}
-        
-    }
-
+    max-width: 100%;  
+  }
 `;
-
-// font-family: "Roboto", sans-serif;
-
-// To make use of the var in style-components :
-// color: var(--color-cadmium-red);
-// font-family: var(--font-body);

@@ -12,8 +12,6 @@ import TestCart from "./Cart/TestCart";
 import Confirmation from "./Confirmation";
 import Cart from "./Cart/Cart";
 
-// import Cart from "./Cart";
-
 import Category from "./Categories/Category";
 import Entertainment from "./Categories/Entertainment";
 import Fitness from "./Categories/Fitness";
@@ -39,7 +37,6 @@ const App = () => {
             <Route path="/" element={<Homepage />} />
             <Route path="/about" element={<AboutUs />} />
             <Route path="/category/:category" element={<Category />} />
-            {/* <Route path="/category/lifestyle/:_id" element={<ItemDetails />} /> */}
             <Route path="/item/:_id" element={<ItemDetails />} />
             <Route path="/cart" element={<Cart />} />
             <Route path="/confirmation" element={<Confirmation />} />
@@ -55,11 +52,7 @@ const App = () => {
 
 export default App;
 
-const Wrapper = styled.div`
-  /* background-color: #ffffcc; */
-  /* height: calc(100vh - 110px); */
-  /* height: 50vh; */
-`;
+const Wrapper = styled.div``;
 
 const Main = styled.div`
   font-family: "Roboto", sans-serif;
