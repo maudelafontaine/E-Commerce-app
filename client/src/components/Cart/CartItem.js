@@ -63,6 +63,7 @@ const ProductDetails = styled.div`
   display: flex;
   flex-direction: column;
   margin: 0px 15px;
+  max-width: 400px;
 `;
 
 const ProductName = styled.div`
@@ -79,7 +80,7 @@ const InputContainer = styled.div`
 `;
 
 const NumberSelector = styled.input`
-  /* width: 10% */
+  min-width: 50px;
   width: 15%;
   margin-right: 5px;
   outline: none;

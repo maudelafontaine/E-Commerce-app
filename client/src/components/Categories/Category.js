@@ -9,7 +9,7 @@ import Loader from "../Loader";
 
 const Category = () => {
   // tracks the state of the service call to get all items in a category
-  const [itemDataStatus, setItemDataStatus] = useState("waiting");
+  const [itemDataStatus, setItemDataStatus] = useState("loading");
   const [page, setPage] = useState(0);
   // tracks all the items in this category
   const [item, setItem] = useState([]);
@@ -20,7 +20,7 @@ const Category = () => {
   const categoryTransformed = ROUTE_CATEGORY_MAP[category];
   const payload = { category: categoryTransformed };
 
-  useEffect(() => {
+  useEffect(async () => {
     setItemDataStatus("loading");
     const fetchingData = async () => {
       const data = await fetch(
@@ -41,15 +41,16 @@ const Category = () => {
       const jsonPages = await pages.json();
       setTotalPages(jsonPages.data);
     };
-    fetchingData().catch(console.error);
-    fetchingPage().catch(console.error);
+    
+    await fetchingData().catch(console.error);
+    await fetchingPage().catch(console.error);
     setItemDataStatus("idle");
   }, [category, page]);
 
   let arrayData = item.data;
-  if (itemDataStatus === "loading") {
-    return <Loader />;
-  }
+  // if (itemDataStatus === "loading") {
+  //   return <Loader />;
+  // }
   return (
     <>
       <Banner>
@@ -58,9 +59,15 @@ const Category = () => {
       <Dropdown>
         <SortBy placeholder="SORT BY                          +"></SortBy>
       </Dropdown>
-      <ListContainer>
-        {arrayData &&
-          arrayData.map((e) => (
+      {itemDataStatus === 'loading' && 
+        <LoaderContainer>
+          <Loader/>
+        </LoaderContainer>
+        }
+      
+        {itemDataStatus === 'idle' && arrayData &&
+        <ListContainer>
+          {arrayData.map(e => (
             <Item key={e._id}>
               <NavigationLink to={`/item/${e._id}`}>
                 <ItemContainer>
@@ -69,9 +76,9 @@ const Category = () => {
                   <Price>{e.price}</Price>
                 </ItemContainer>
               </NavigationLink>
-            </Item>
-          ))}
-      </ListContainer>
+            </Item>))}
+        </ListContainer>}
+      
       <Pagination page={page} setPage={setPage} categoryPages={totalPages} />
     </>
   );
@@ -166,6 +173,13 @@ const Price = styled.h2`
   color: black;
   font-size: 18px;
   font-weight: normal;
+`;
+
+const LoaderContainer = styled.div`
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  width: 100%;
 `;
 
 // Notes :

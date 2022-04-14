@@ -119,12 +119,11 @@ const reducer = (state, action) => {
         currentItems: newItems,
       };
     }
-
-    // TODO: Implement this case once services are ready
-    // case 'confirm-purchase':
-    //     return {
-
-    //     }
+    // Totally clear all items from the cart, like after a purchase
+    case 'clear-cart': {
+      console.log('clearing cart');
+      return {...initialState};
+    }
 
     default:
       throw new Error(`Action type ${action.type} is not recognized!`);
@@ -177,16 +176,14 @@ export const CartProvider = ({ children }) => {
     );
     return total;
   };
+  
 
   // return an array of ids of items in the cart
   const getIds = () => Object.keys(state.currentItems);
 
-  // TODO: implement this once the services are ready
-  // const purchaseItemsInCart = () => {
-  //     dispatch({
-  //         type:'confirm-purchase',
-  //     });
-  // }
+  // clear the cart
+
+  const clearCart = () => dispatch({type:'clear-cart'});
 
   return (
     <CartContext.Provider
@@ -200,6 +197,7 @@ export const CartProvider = ({ children }) => {
           // purchaseItemsInCart
           getTotal,
           getIds,
+          clearCart
         },
       }}
     >
