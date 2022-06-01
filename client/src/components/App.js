@@ -24,6 +24,7 @@ import Industrial from "./Categories/Industrial";
 // Stretch
 import Wishlist from "./Wishlist";
 import Login from "./Login";
+import CustomerForm from "./CustomerForm";
 
 const App = () => {
   return (
@@ -42,6 +43,7 @@ const App = () => {
             <Route path="/confirmation" element={<Confirmation />} />
             <Route path="/wishlist" element={<Wishlist />} />
             <Route path="/login" element={<Login />} />
+            <Route path="/customer-form" element={<CustomerForm />} />
           </Routes>
         </Main>
         <Footer />

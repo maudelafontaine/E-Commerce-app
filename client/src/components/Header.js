@@ -21,7 +21,7 @@ const Header = () => {
   return (
     <Container>
       <NavigationLink to="/" style={logoStyle}>
-        RandomCo
+        RandCo
       </NavigationLink>
       <SearchContainer>
         <Search placeholder="Search"></Search>
