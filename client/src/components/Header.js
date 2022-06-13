@@ -10,7 +10,9 @@ import { AiFillHeart } from "react-icons/ai";
 const Header = () => {
   return (
     <Container>
-      <LinkToHp to="/">RandCo</LinkToHp>
+      <LinkToHp to="/">
+        <Logo src="/assets/RandCo.png" />
+      </LinkToHp>
       <SearchContainer>
         <Search placeholder="Search"></Search>
         <SearchBtn>
@@ -56,7 +58,7 @@ const Container = styled.div`
   align-items: center;
   justify-content: space-around;
   background-color: #ff6666;
-  height: 10vh;
+  height: 100px;
 `;
 
 const LinkToHp = styled(NavLink)`
@@ -72,6 +74,13 @@ const LinkToHp = styled(NavLink)`
     cursor: pointer;
     border-bottom: none;
   }
+`;
+
+const Logo = styled.img`
+  width: 160px;
+  height: 160px;
+  padding-top: 5px;
+  padding-bottom: 5px;
 `;
 // Search feature
 const SearchContainer = styled.div``;

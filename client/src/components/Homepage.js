@@ -91,6 +91,7 @@ const Message = styled.h2`
   padding: 22px;
   border: 6px solid #ff6666;
   font-size: 25px;
+  border-radius: 5px;
 `;
 
 const Btn = styled.button`
@@ -129,4 +130,5 @@ const Text = styled.h2`
   border-radius: 2px;
   font-size: 18px;
   border: 4px solid #adebeb;
+  border-radius: 5px;
 `;

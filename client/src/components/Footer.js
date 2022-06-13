@@ -51,10 +51,10 @@ const Footer = () => {
           SOCIAL LINKS
         </h2>
         <Icons>
-          <AiFillInstagram size={33} />
-          <AiFillFacebook size={33} />
-          <AiFillTwitterCircle size={33} />
-          <FaPinterest size={33} />
+          <AiFillInstagram size={33} style={{ color: "white" }} />
+          <AiFillFacebook size={33} style={{ color: "white" }} />
+          <AiFillTwitterCircle size={33} style={{ color: "white" }} />
+          <FaPinterest size={33} style={{ color: "white" }} />
         </Icons>
       </SocialMedia>
       <Newsletter>
@@ -85,6 +85,7 @@ const Container = styled.div`
   flex-direction: row;
   justify-content: space-around;
   height: 265px;
+  padding-top: 20px;
 `;
 
 // Footer menu container
@@ -158,13 +159,17 @@ const Signup = styled.input`
 const Btn = styled.button`
   background-color: black;
   font-size: 20px;
-  border-radius: 2px;
+  border-radius: 5px;
   border: none;
   width: 100px;
   height: 50px;
   padding: 8px;
   font-family: "Roboto", sans-serif;
-  margin-top: 5px;
+  margin-top: 10px;
+  color: black;
+  background-color: white;
+  font-weight: bold;
+  background-color: #adebeb;
 
   &:hover {
     cursor: pointer;
