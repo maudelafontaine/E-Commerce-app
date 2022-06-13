@@ -11,7 +11,7 @@ const Header = () => {
   return (
     <Container>
       <LinkToHp to="/">
-        <Logo src="/assets/RandCo.png" />
+        <Logo src="/assets/logo.png" />
       </LinkToHp>
       <SearchContainer>
         <Search placeholder="Search"></Search>
@@ -36,10 +36,10 @@ const Header = () => {
           <Link to="/category/pets">Pets</Link>
         </DropdownContent>
       </Dropdown>
-      <NavigationLink to="/login">Login</NavigationLink>
       <NavigationLink to="/wishlist">
         <AiFillHeart size={"30px"} />
       </NavigationLink>
+      <NavigationLink to="/login">Login</NavigationLink>
       <NavigationLink to="/cart">
         <AiOutlineShoppingCart size={"26px"} style={{ color: "black" }} />
       </NavigationLink>
