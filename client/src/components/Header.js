@@ -8,21 +8,9 @@ import { AiOutlineShoppingCart } from "react-icons/ai";
 import { AiFillHeart } from "react-icons/ai";
 
 const Header = () => {
-  const logoStyle = {
-    fontSize: "44px",
-    marginLeft: "10px",
-    marginRight: "20px",
-    textDecoration: "none",
-    color: "black",
-    fontWeight: "bold",
-    fontFamily: "'Roboto', sans-serif",
-  };
-
   return (
     <Container>
-      <NavigationLink to="/" style={logoStyle}>
-        RandCo
-      </NavigationLink>
+      <LinkToHp to="/">RandCo</LinkToHp>
       <SearchContainer>
         <Search placeholder="Search"></Search>
         <SearchBtn>
@@ -71,6 +59,20 @@ const Container = styled.div`
   height: 10vh;
 `;
 
+const LinkToHp = styled(NavLink)`
+  font-size: 44px;
+  margin-left: 10px;
+  margin-right: 20px;
+  text-decoration: none;
+  color: black;
+  font-weight: bold;
+  font-family: "Roboto", sans-serif;
+
+  &:hover {
+    cursor: pointer;
+    border-bottom: none;
+  }
+`;
 // Search feature
 const SearchContainer = styled.div``;
 
@@ -153,6 +155,6 @@ const NavigationLink = styled(NavLink)`
 
   &:hover {
     cursor: pointer;
-    border-bottom: 3px solid black;
+    color: #adebeb;
   }
 `;

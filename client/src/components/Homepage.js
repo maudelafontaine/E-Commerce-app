@@ -89,8 +89,7 @@ const Message = styled.h2`
   margin-bottom: 8px;
   background-color: white;
   padding: 22px;
-  border-style: solid;
-  border-width: 4px;
+  border: 6px solid #ff6666;
   font-size: 25px;
 `;
 
@@ -102,10 +101,11 @@ const Btn = styled.button`
   height: 60px;
   border-color: white;
   font-weight: bold;
-  color: white;
-  background-color: #adebeb;
+  color: black;
+  background-color: #ff6666;
   border: none;
   cursor: pointer;
+  font-size: 22px;
 
   &:hover {
     color: black;
@@ -128,4 +128,5 @@ const Text = styled.h2`
   margin: 8px;
   border-radius: 2px;
   font-size: 18px;
+  border: 4px solid #adebeb;
 `;

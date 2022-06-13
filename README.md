@@ -42,6 +42,9 @@ As a user,
 The following are the next steps in improving my application:
 
 - Save item(s) purchased by user
+- User can search the store for item(s) based on various criteria
+- User can sign up and sign in/sign out
 - Create a profile page where users could view their orders
 - Create a wishlist page to save user's favorite items
 - Create an order form
+- Make the app accessible for all devices
