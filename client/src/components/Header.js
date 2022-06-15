@@ -81,6 +81,7 @@ const Logo = styled.img`
   height: 160px;
   padding-top: 5px;
   padding-bottom: 5px;
+  z-index: 1;
 `;
 // Search feature
 const SearchContainer = styled.div``;

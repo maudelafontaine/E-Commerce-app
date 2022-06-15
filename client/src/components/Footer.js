@@ -84,8 +84,9 @@ const Container = styled.div`
   display: flex;
   flex-direction: row;
   justify-content: space-around;
-  height: 265px;
+  height: 300px;
   padding-top: 20px;
+  padding-bottom: 20px;
 `;
 
 // Footer menu container

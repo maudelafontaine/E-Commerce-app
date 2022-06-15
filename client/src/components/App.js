@@ -54,7 +54,9 @@ const App = () => {
 
 export default App;
 
-const Wrapper = styled.div``;
+const Wrapper = styled.div`
+  height: 100vh;
+`;
 
 const Main = styled.div`
   font-family: "Roboto", sans-serif;
