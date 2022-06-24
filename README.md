@@ -35,7 +35,15 @@ As a user,
 
 ### Homepage
 
-![alt text](/client/public/assets/HP.PNG)
+![alt text](/client/public/assets/landing_page.PNG)
+
+### Category - Entertainment
+
+![alt text](/client/public/assets/entertainment.PNG)
+
+### Cart
+
+![alt text](/client/public/assets/cart.PNG)
 
 ## Next Steps
 
